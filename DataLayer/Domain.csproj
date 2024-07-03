@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\DomainShared\DomainShared.csproj" />
   </ItemGroup>
 
