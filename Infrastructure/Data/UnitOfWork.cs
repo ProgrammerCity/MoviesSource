@@ -19,10 +19,7 @@ namespace EntityFreamewoerkCore.Data
         {
             get
             {
-                if (_moviesRepository == null)
-                {
-                    _moviesRepository = new MoviesManager(_mainDb);
-                }
+                _moviesRepository ??= new MoviesManager(_mainDb);
                 return _moviesRepository;
             }
         }

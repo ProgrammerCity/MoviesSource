@@ -2,6 +2,8 @@
 using Domain.Models.Catequries;
 using Domain.Models.Genres;
 using DomainShared.Error;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Domain.Models.Movies
 {
@@ -17,6 +19,8 @@ namespace Domain.Models.Movies
 
         #region Properties
         public string Name { get; private set; } = default!;
+        public string DirectorName { get; private set; } = default!;
+        public int ConstructionYear { get; private set; } = default!;
         public byte Rate { get; private set; } = default!;
         #endregion
 
@@ -30,23 +34,52 @@ namespace Domain.Models.Movies
             Guid categuryId,
             string name,
             Guid genre,
-            byte rate)
+            byte rate,
+            int constructionYear,
+            string directorName)
         {
             Id = id;
             SetCategury(categuryId);
             SetName(name);
             SetGenre(genre);
             SetRate(rate);
+            SetDirectorNam(directorName);
+            SetCustructionYear(constructionYear);
         }
+
         #endregion
 
         #region Method
+        private Movie SetCustructionYear(int constructionYear)
+        {
+            if (constructionYear < 0)
+            {
+                throw new ArgumentException(CoreError.IsMoreThan("سال ساخت", "صفر"));
+            }
+            ConstructionYear = constructionYear;
+            return this;
+        }
+
+        private Movie SetDirectorNam(string directorName)
+        {
+            if (string.IsNullOrEmpty(directorName))
+            {
+                throw new ArgumentException(CoreError.IsMandatory("نام کارگردان"));
+            }
+
+            if (directorName.Length > 50)
+            {
+                throw new ArgumentException(CoreError.IsLess("نام کارگردان", "پنجاه"));
+            }
+            DirectorName = directorName;
+            return this;
+        }
 
         public Movie SetRate(byte rate)
         {
             if (rate < 0)
             {
-                throw new ArgumentException(CoreError.IsMoreThan("امتیاز", ""));
+                throw new ArgumentException(CoreError.IsMoreThan("امتیاز", "صفر"));
             }
             Rate = rate;
             return this;

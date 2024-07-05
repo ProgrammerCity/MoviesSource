@@ -26,7 +26,8 @@ namespace EntityCore.Data
             builder.Entity<Movie>(b =>
             {
                 b.HasIndex(t => t.Id);
-                b.Property(t => t.Name).IsRequired();
+                b.Property(t => t.Name).IsRequired().HasMaxLength(50);
+                b.Property(t => t.DirectorName).IsRequired().HasMaxLength(50);
 
                 b.HasOne(t => t.Categury)
                  .WithMany(t => t.Movies)
