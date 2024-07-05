@@ -48,6 +48,10 @@ namespace MoviesProj
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
+
+                services.AddSingleton<MoviesPage>();
+                //services.AddSingleton<MoviesViewModel>();
+
                 services.AddSingleton<DataPage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();

@@ -22,7 +22,14 @@ namespace MoviesProj.ViewModels.Windows
                 Content = "Data",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Movies",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.MoviesPage)
             }
+
         };
 
         [ObservableProperty]
