@@ -10,10 +10,10 @@ namespace Domain.Models.Movies
     public class Movie : AuditedEntity<Guid>
     {
         #region Navigatoin
-        public Categury Categury { get; private set; } = new();
+        //public Categury Categury { get; private set; } = new();
         public Guid CateguryId { get; private set; }
 
-        public Genre Genre { get; private set; } = new();
+        //public Genre Genre { get; private set; } = new();
         public Guid GenreId { get; private set; }
         #endregion
 
@@ -21,7 +21,7 @@ namespace Domain.Models.Movies
         public string Name { get; private set; } = default!;
         public string DirectorName { get; private set; } = default!;
         public int ConstructionYear { get; private set; } = default!;
-        public byte Rate { get; private set; } = default!;
+        public float Rate { get; private set; } = default!;
         #endregion
 
         #region Ctor
@@ -34,7 +34,7 @@ namespace Domain.Models.Movies
             Guid categuryId,
             string name,
             Guid genre,
-            byte rate,
+            float rate,
             int constructionYear,
             string directorName)
         {
@@ -50,7 +50,7 @@ namespace Domain.Models.Movies
         #endregion
 
         #region Method
-        private Movie SetCustructionYear(int constructionYear)
+        public Movie SetCustructionYear(int constructionYear)
         {
             if (constructionYear < 0)
             {
@@ -60,7 +60,7 @@ namespace Domain.Models.Movies
             return this;
         }
 
-        private Movie SetDirectorNam(string directorName)
+        public Movie SetDirectorNam(string directorName)
         {
             if (string.IsNullOrEmpty(directorName))
             {
@@ -75,7 +75,7 @@ namespace Domain.Models.Movies
             return this;
         }
 
-        public Movie SetRate(byte rate)
+        public Movie SetRate(float rate)
         {
             if (rate < 0)
             {

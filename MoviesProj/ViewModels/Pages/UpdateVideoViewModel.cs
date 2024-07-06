@@ -4,7 +4,7 @@ using Wpf.Ui.Controls;
 
 namespace MoviesProj.ViewModels.Pages
 {
-    public partial class UpdateVideoViewModel : ObservableObject, INavigationAware
+    public partial class UpdateVideoViewModel : ObservableObject
     {
         private readonly INavigationService _navigationService;
         private readonly IUnitOfWork _unitOfWork;
@@ -24,6 +24,9 @@ namespace MoviesProj.ViewModels.Pages
 
         [ObservableProperty]
         private Guid _genreId;
+        
+        [ObservableProperty]
+        private Guid _movieId;
 
         [ObservableProperty]
         private Guid _catequryId;
@@ -34,22 +37,10 @@ namespace MoviesProj.ViewModels.Pages
         [ObservableProperty]
         private string _directorName = default!;
 
-
-        public void OnNavigatedTo()
-        {
-            InitializeViewModel();
-        }
-
-        public void OnNavigatedFrom() { }
-
-        private void InitializeViewModel()
-        {
-        }
-
         [RelayCommand]
-        private async Task CreateMovies(Type pageType)
+        private async Task OnSumbit(Type pageType)
         {
-            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
+            var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId,Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
             if (!isSuccess)
             {
                 _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));

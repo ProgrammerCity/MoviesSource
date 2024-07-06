@@ -29,15 +29,15 @@ namespace EntityCore.Data
                 b.Property(t => t.Name).IsRequired().HasMaxLength(50);
                 b.Property(t => t.DirectorName).IsRequired().HasMaxLength(50);
 
-                b.HasOne(t => t.Categury)
-                 .WithMany(t => t.Movies)
-                 .HasForeignKey(t => t.CateguryId)
-                 .OnDelete(DeleteBehavior.Cascade); ;
+                //b.HasOne(t => t.Categury)
+                // .WithMany(t => t.Movies)
+                // .HasForeignKey(t => t.CateguryId)
+                // .OnDelete(DeleteBehavior.Cascade); 
                 
-                b.HasOne(t => t.Genre)
-                 .WithMany(t => t.Movies)
-                 .HasForeignKey(t => t.GenreId)
-                 .OnDelete(DeleteBehavior.Cascade); ;
+                //b.HasOne(t => t.Genre)
+                // .WithMany(t => t.Movies)
+                // .HasForeignKey(t => t.GenreId)
+                // .OnDelete(DeleteBehavior.Cascade); ;
             });
             
             

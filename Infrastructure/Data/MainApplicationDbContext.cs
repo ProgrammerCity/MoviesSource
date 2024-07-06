@@ -1,5 +1,4 @@
 ﻿using Domain.Abstractions;
-using Domain.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq.Expressions;

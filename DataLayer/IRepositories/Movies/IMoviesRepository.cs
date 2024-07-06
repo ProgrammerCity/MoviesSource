@@ -8,7 +8,7 @@ namespace Domain.Movies
     public interface IMoviesRepository : IRepository<Movie>
     {
         Task<PagedResulViewModel<MoviesListViewModel>> GetMoviesList(string name,
-            byte? rate,
+            float? rate,
             Guid? categuryId,
             Guid? gereId,
             int? constructionYear,
@@ -16,9 +16,17 @@ namespace Domain.Movies
             int pageNum,
             int pageCount);
 
-        Task<(string error, bool isSuccess)> Create(string name, 
-            byte rate,
+        Task<(string error, bool isSuccess)> Create(string name,
+            float rate,
             Guid categuryId, 
+            Guid gereId,
+            int constructionYear,
+            string directorName);
+
+        Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
+            string name,
+            float rate,
+            Guid categuryId,
             Guid gereId,
             int constructionYear,
             string directorName);

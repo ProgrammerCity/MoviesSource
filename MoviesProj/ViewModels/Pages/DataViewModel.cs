@@ -9,7 +9,7 @@ namespace MoviesProj.ViewModels.Pages
         private readonly INavigationService _navigationService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISnackbarService _snackbarService;
-        public DataViewModel(IUnitOfWork unitOfWork, ISnackbarService snackbarService, INavigationService navigationService)
+        public DataViewModel(IUnitOfWork unitOfWork, INavigationService navigationService, ISnackbarService snackbarService)
         {
             _unitOfWork = unitOfWork;
             _snackbarService = snackbarService;
@@ -20,7 +20,7 @@ namespace MoviesProj.ViewModels.Pages
         private int _constructionYear;
 
         [ObservableProperty]
-        private byte _rate;
+        private float _rate;
 
         [ObservableProperty]
         private Guid _genreId;
@@ -47,7 +47,7 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task CreateMovies(Type pageType)
+        private async Task OnSumbit(Type pageType)
         {
             var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
             if (!isSuccess)
