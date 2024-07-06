@@ -58,14 +58,11 @@ namespace EntityFreamewoerkCore.Movies
             //    .Select(t => new MoviesListViewModel(t.Name, "t.Categury.Name", "t.Genre.Titele", t.Rate, t.GenreId, t.CateguryId))
             //.AsQueryable();
 
-            var count = await query.CountAsync();
-            var movies = await query.Skip(--pageNum).Take(pageCount).ToListAsync();
-
             return new PagedResulViewModel<MoviListViewModel>(
                 await query.CountAsync(),
                 pageCount,
                 pageNum,
-                await query.Skip(pageNum).Take(pageCount).ToListAsync());
+                await query.Skip(--pageNum * pageCount).Take(pageCount).ToListAsync());
         }
 
 

@@ -14,7 +14,8 @@ namespace EntityCore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer($"Data Source=192.168.10.242\\DESKTOP-L3HJTMF\\SQLEXPRESS,1434;Database=TestCore;TrustServerCertificate=True;User Id=MyLogIn;Password=P123a@h;");
+            //optionsBuilder.UseSqlServer($"Data Source=192.168.10.242\\DESKTOP-L3HJTMF\\SQLEXPRESS,1434;Database=TestCore;TrustServerCertificate=True;User Id=MyLogIn;Password=P123a@h;");
+            optionsBuilder.UseSqlServer($"Data Source=(LocalDb)\\MSSQLLocalDB;Database=TestCore;TrustServerCertificate=True;Integrated Security=True;");
             base.OnConfiguring(optionsBuilder);
         }
 

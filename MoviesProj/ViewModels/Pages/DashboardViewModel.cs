@@ -27,7 +27,7 @@ namespace MoviesProj.ViewModels.Pages
         private int? _constructionYear;
 
         [ObservableProperty]
-        private byte? _rate;
+        private float? _rate;
 
         [ObservableProperty]
         private Guid? _genreId;
@@ -49,7 +49,7 @@ namespace MoviesProj.ViewModels.Pages
             await InitializeViewModel();
         }
 
-        public void OnNavigatedFrom()
+        public void OnNavigatedFrom() 
         {
         }
 
