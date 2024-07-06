@@ -4,12 +4,12 @@ using Wpf.Ui.Controls;
 
 namespace MoviesProj.ViewModels.Pages
 {
-    public partial class DataViewModel : ObservableObject, INavigationAware
+    public partial class CreateMoviesViewModel : ObservableObject, INavigationAware
     {
         private readonly INavigationService _navigationService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISnackbarService _snackbarService;
-        public DataViewModel(IUnitOfWork unitOfWork, INavigationService navigationService, ISnackbarService snackbarService)
+        public CreateMoviesViewModel(IUnitOfWork unitOfWork, INavigationService navigationService, ISnackbarService snackbarService)
         {
             _unitOfWork = unitOfWork;
             _snackbarService = snackbarService;

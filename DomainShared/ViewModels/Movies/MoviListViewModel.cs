@@ -1,6 +1,6 @@
 ﻿namespace DomainShared.ViewModels.Movies
 {
-    public record MoviesListViewModel(string Name,
+    public record MoviListViewModel(string Name,
         string CateguryName,
         string GenreTitele,
         float Rate,

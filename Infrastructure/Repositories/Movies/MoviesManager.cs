@@ -12,7 +12,7 @@ namespace EntityFreamewoerkCore.Movies
 {
     public class MoviesManager(MainApplicationDbContext context) : Repository<Movie>(context), IMoviesRepository
     {
-        public async Task<PagedResulViewModel<MoviesListViewModel>> GetMoviesList(string name,
+        public async Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
             float? rate,
             Guid? catequryId,
             Guid? genreId,
@@ -37,7 +37,7 @@ namespace EntityFreamewoerkCore.Movies
                   join gen in DbContext.Set<Genre>()
                            on mov.GenreId equals gen.Id
 
-                           select new MoviesListViewModel(
+                           select new MoviListViewModel(
                                cat.Name,
                                cat.Name,
                                gen.Titele,
@@ -61,7 +61,7 @@ namespace EntityFreamewoerkCore.Movies
             var count = await query.CountAsync();
             var movies = await query.Skip(--pageNum).Take(pageCount).ToListAsync();
 
-            return new PagedResulViewModel<MoviesListViewModel>(
+            return new PagedResulViewModel<MoviListViewModel>(
                 await query.CountAsync(),
                 pageCount,
                 pageNum,

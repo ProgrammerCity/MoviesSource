@@ -1,4 +1,6 @@
 ﻿using Domain.IRepositories;
+using Domain.Models.Movies;
+using DomainShared.ViewModels.Movies;
 using EntityCore.Data;
 using EntityFreamewoerkCore.Data;
 using Microsoft.Extensions.Configuration;
@@ -57,11 +59,11 @@ namespace MoviesProj
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
 
-                services.AddSingleton<MoviesPage>();
+                services.AddSingleton<CreateMoviesPage>();
                 //services.AddSingleton<MoviesViewModel>();
 
-                services.AddSingleton<DataPage>();
-                services.AddSingleton<DataViewModel>();
+                services.AddSingleton<MoviesListPage>();
+                services.AddSingleton<MoviesListViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 

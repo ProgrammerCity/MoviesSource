@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MoviesProj.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for MoviesPage.xaml
+    /// Interaction logic for MoviesListPage.xaml
     /// </summary>
-    public partial class MoviesPage : Page
+    public partial class MoviesListPage : Page
     {
-        public MoviesPage()
+        public MoviesListPage()
         {
             InitializeComponent();
         }
