@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Domain.IRepositories;
+using EntityCore.Data;
+using EntityFreamewoerkCore.Data;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MoviesProj.Services;
@@ -44,6 +47,11 @@ namespace MoviesProj
 
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
+
+                services.AddSingleton<ISnackbarService, SnackbarService>();
+
+
+                services.AddSingleton<IUnitOfWork, UnitOfWork>();
                 services.AddSingleton<MainWindowViewModel>();
 
                 services.AddSingleton<DashboardPage>();
@@ -56,6 +64,12 @@ namespace MoviesProj
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<UpdateVideoPage>();
+                services.AddSingleton<UpdateVideoViewModel>();
+
+                services.AddDbContext<MainApplicationDbContext>();
+
             }).Build();
 
         /// <summary>

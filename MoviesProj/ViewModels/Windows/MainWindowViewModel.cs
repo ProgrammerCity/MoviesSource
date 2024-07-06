@@ -6,7 +6,7 @@ namespace MoviesProj.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - MoviesProj";
+        private string _applicationTitle = "MoviesProj";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
@@ -25,9 +25,9 @@ namespace MoviesProj.ViewModels.Windows
             },
             new NavigationViewItem()
             {
-                Content = "Movies",
+                Content = "update",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.MoviesPage)
+                TargetPageType = typeof(Views.Pages.DataPage)
             }
 
         };

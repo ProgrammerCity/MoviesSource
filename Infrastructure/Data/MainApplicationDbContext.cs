@@ -1,5 +1,4 @@
 ﻿using Domain.Abstractions;
-using Domain.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq.Expressions;
@@ -9,13 +8,15 @@ namespace EntityCore.Data
 {
     public class MainApplicationDbContext : DbContext
     {
-        public MainApplicationDbContext(DbContextOptions<MainApplicationDbContext> options) : base(options)
-        {
-        }
-
         private static readonly MethodInfo ConfigurePropertiesMethodInfo = typeof(MainApplicationDbContext)
         .GetMethod(nameof(ConfigureProperties),
         BindingFlags.Instance | BindingFlags.NonPublic)!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer($"Data Source=192.168.10.242\\DESKTOP-L3HJTMF\\SQLEXPRESS,1434;Database=TestCore;TrustServerCertificate=True;User Id=MyLogIn;Password=P123a@h;");
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -86,45 +87,45 @@ namespace EntityCore.Data
             return expression;
         }
 
-        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        //{
-        //    HandleSoftDelete();
-        //    return base.SaveChangesAsync(cancellationToken);
-        //}
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            HandleSoftDelete();
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
-        //private void HandleSoftDelete()
-        //{
-        //    var entities = ChangeTracker.Entries<IEntities>()
-        //                        .Where(e => e.State == EntityState.Deleted || e.State == EntityState.Modified || e.State == EntityState.Added);
-        //    foreach (var entity in entities)
-        //    {
-        //        switch (entity.State)
-        //        {
-        //            case EntityState.Deleted:
-        //                if (entity.Entity is ISoftDeleted)
-        //                {
-        //                    entity.State = EntityState.Modified;
-        //                    var et = entity.Entity as ISoftDeleted;
-        //                    et.DeletionTime = DateTime.Now;
-        //                    et.DeleterId = _currentUserService.GetCurrentUserName();
-        //                    et.IsDeleted = true;
-        //                }
-        //                break;
-        //            case EntityState.Modified:
-        //                var book = entity.Entity;
-        //                book.LastModifireId = _currentUserService.GetCurrentUserName(); 
-        //                book.LastModificationTime = DateTime.Now;
-        //                break;
-        //            case EntityState.Added:
-        //                var boook = entity.Entity;
-        //                boook.CreatorId = _currentUserService.GetCurrentUserName(); 
-        //                boook.CreationTime = DateTime.Now;
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //}
+        private void HandleSoftDelete()
+        {
+            var entities = ChangeTracker.Entries<IEntities>()
+                                .Where(e => e.State == EntityState.Deleted || e.State == EntityState.Modified || e.State == EntityState.Added);
+            foreach (var entity in entities)
+            {
+                switch (entity.State)
+                {
+                    case EntityState.Deleted:
+                        if (entity.Entity is ISoftDeleted)
+                        {
+                            entity.State = EntityState.Modified;
+                            var et = entity.Entity as ISoftDeleted;
+                            et.DeletionTime = DateTime.Now;
+                            et.DeleterId = Guid.Empty;
+                            et.IsDeleted = true;
+                        }
+                        break;
+                    case EntityState.Modified:
+                        var book = entity.Entity;
+                        book.LastModifireId = Guid.Empty;
+                        book.LastModificationTime = DateTime.Now;
+                        break;
+                    case EntityState.Added:
+                        var boook = entity.Entity;
+                        boook.CreatorId = Guid.Empty;
+                        boook.CreationTime = DateTime.Now;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
     }
 }
