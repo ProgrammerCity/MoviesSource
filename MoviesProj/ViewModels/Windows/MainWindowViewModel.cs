@@ -29,6 +29,7 @@ namespace MoviesProj.ViewModels.Windows
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
             }
+
         };
 
         [ObservableProperty]
