@@ -5,13 +5,13 @@ using Wpf.Ui.Controls;
 
 namespace MoviesProj.ViewModels.Pages
 {
-    public partial class DashboardViewModel : ObservableObject, INavigationAware
+    public partial class MoviesListViewModel : ObservableObject, INavigationAware
     {
         private bool _isInit;
         private readonly INavigationService _navigationService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DashboardViewModel(INavigationService navigationService, IUnitOfWork unitOfWork)
+        public MoviesListViewModel(INavigationService navigationService, IUnitOfWork unitOfWork)
         {
             _navigationService = navigationService;
             _unitOfWork = unitOfWork;

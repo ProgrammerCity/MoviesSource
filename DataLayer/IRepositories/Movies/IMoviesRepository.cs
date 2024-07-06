@@ -7,7 +7,7 @@ namespace Domain.Movies
 {
     public interface IMoviesRepository : IRepository<Movie>
     {
-        Task<PagedResulViewModel<MoviesListViewModel>> GetMoviesList(string name,
+        Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
             float? rate,
             Guid? categuryId,
             Guid? gereId,
