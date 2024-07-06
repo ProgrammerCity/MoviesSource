@@ -143,12 +143,12 @@
                                        Text="ژانر"
                                        Margin="2 0 0 4 " />
                         <StackPanel>
-                            <ui:ListView Grid.Row="1" Height="100" d:ItemsSource="{d:SampleData ItemCount=5}">
+                            <ui:ListView Margin="10" Name="lvUsers" Grid.Row="1">
                                 <ui:ListView.View>
                                     <ui:GridView>
-                                        <GridViewColumn Header="Last Name"/>
-                                        <GridViewColumn Header="Last Name"/>
-                                        <GridViewColumn Header="Last Name"/>
+                                        <ui:GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                                        <ui:GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Age}" />
+                                        <ui:GridViewColumn Header="Mail" Width="150" DisplayMemberBinding="{Binding Mail}" />
                                     </ui:GridView>
                                 </ui:ListView.View>
                             </ui:ListView>
