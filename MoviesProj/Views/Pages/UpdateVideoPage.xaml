@@ -4,11 +4,206 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:MoviesProj.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:models="clr-namespace:MoviesProj.Models"
       mc:Ignorable="d" 
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UpdateVideoPage">
 
+
     <Grid>
-        
+        <Border Opacity=".8" CornerRadius="15" Margin="40" Background="Black">
+            <Border.Effect>
+                <BlurEffect Radius="10" KernelType="Gaussian"/>
+            </Border.Effect>
+        </Border>
+        <Border  Margin="57" >
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ui:SymbolIcon Symbol="Circle16" 
+                               Filled="True" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="6"
+                               Foreground="#FF949494"/>
+                <ui:SymbolIcon Grid.Column="5"
+                               Symbol="Circle16"
+                               Filled="True" 
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top" 
+                               FontSize="6"
+                               Foreground="#FF949494"/>
+                <ui:SymbolIcon Grid.Column="5"
+                               Grid.Row="1"
+                               Symbol="Circle16"
+                               Filled="True"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom" 
+                               FontSize="7"/>
+                <ui:SymbolIcon Grid.Row="1"
+                               Symbol="Circle16"
+                               Filled="True" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Bottom" 
+                               FontSize="7"/>
+                <Grid Grid.Column="1"
+                      Grid.RowSpan="2"
+                      Grid.ColumnSpan="4" 
+                      Margin="0 15 0 0"
+                      FlowDirection="RightToLeft">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".5*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 10">
+                        <TextBlock FontFamily="Calibri"
+                                       FontSize="15"
+                                       Text="عنوان فیلم"
+                                       Margin="4 0 0 0 " />
+                        <ui:TextBox TextAlignment="Center"
+                                     FontSize="15"
+                                     Margin="0 4 0 0 "
+                                     FontFamily="Calibri" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" 
+                                Margin="0 10 10 10">
+                        <ui:TextBox TextAlignment="Center"
+                                     FontSize="15"
+                                     PlaceholderText="سال ساخت"
+                                     Margin="0 4 0 0 "
+                                     FontFamily="Calibri" />
+                    </StackPanel>
+                    <StackPanel  Grid.Row="1" 
+                                 Grid.Column="1"
+                                Margin="10 10 10 10">
+                        <ui:TextBox TextAlignment="Center"
+                                FontSize="15"
+                                Text="امتیاز"
+                                IsEnabled="False"
+                                Margin="0 4 0 0 "
+                                FontFamily="Calibri" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" 
+                                Grid.Column="2"
+                                Margin="10 10 0 10">
+                        <ui:TextBox TextAlignment="Center"
+                                     FontSize="15"
+                                     PlaceholderText="کارگردان"
+                                     Margin="0 4 0 0 "
+                                     FontFamily="Calibri" />
+                    </StackPanel>
+                    <ui:RatingControl Grid.Column="1" 
+                                      Grid.Row="2"
+                                      Margin="0 8 0 10 "
+                                      FlowDirection="LeftToRight"
+                                      HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Row="3"
+                              Margin="0 4 0 10"
+                              Grid.ColumnSpan="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <ui:ListView
+                            MaxHeight="200"
+                            d:ItemsSource="{d:SampleData ItemCount=3}"
+                            ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
+                            SelectedIndex="2"
+                            SelectionMode="Multiple">
+                            <ui:ListView.ItemTemplate>
+                                <DataTemplate DataType="{x:Type models:ListViewDto}">
+                                    <TextBlock Margin="8,4" Text="{Binding Titele, Mode=OneWay}" />
+                                </DataTemplate>
+                            </ui:ListView.ItemTemplate>
+                        </ui:ListView>
+                    </Grid>
+                    <Grid Grid.Row="4"
+                              Margin="0 4 0 10"
+                              Grid.ColumnSpan="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                       FontFamily="Calibri"
+                                       FontSize="15"
+                                       Text="بازیگران"
+                                       Margin="2 0 0 4 " />
+
+                        <ui:ListView
+                    Grid.Column="1"
+                    MaxHeight="200"
+                    d:ItemsSource="{d:SampleData ItemCount=2}"
+                    ItemsSource="{Binding ViewModel.GenreList, Mode=TwoWay}"
+                    SelectedIndex="1"
+                    SelectionMode="Multiple">
+                            <ui:ListView.ItemTemplate>
+                                <DataTemplate DataType="{x:Type models:ListViewDto}">
+                                    <Grid Margin="8,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse
+                                    x:Name="Ellipse"
+                                    Grid.RowSpan="2"
+                                    Width="32"
+                                    Height="32"
+                                    Margin="6"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Fill="{ui:ThemeResource ControlStrongStrokeColorDefaultBrush}" />
+                                        <TextBlock
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="12,6,0,0"
+                                    FontWeight="Bold"
+                                    Text="{Binding Titele, Mode=OneWay}" />
+                                        <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="12,0,0,6"
+                                    Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding Company, Mode=OneWay}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ui:ListView.ItemTemplate>
+                        </ui:ListView>
+                    </Grid>
+
+
+                </Grid>
+            </Grid>
+        </Border>
+
     </Grid>
 </Page>
