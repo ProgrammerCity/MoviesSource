@@ -83,6 +83,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.ColumnSpan="3" VerticalAlignment="Bottom" Margin="0 0 0 10">
@@ -213,6 +214,25 @@
                             </ui:ListView.ItemTemplate>
                         </ui:ListView>
                     </Grid>
+
+                    <Button Grid.Row="7"
+                            Grid.Column="1"
+                                Margin="5"
+                                FontSize="16"
+                                Padding="30 4"
+                                x:Name="Btn_submit"
+                                FontFamily="Calibri"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Command="{Binding ViewModel.CreateCustomerCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ثبت" />
+                            <TextBlock Text=" (F1)"
+                                           FontSize="12"
+                                           VerticalAlignment="Center"
+                                           Foreground="#FFA3A3A3" />
+                        </StackPanel>
+                    </Button>
 
 
                 </Grid>
