@@ -16,21 +16,143 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
 
-        <ui:Button
-            Grid.Column="0"
-            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-        <TextBlock
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.Counter, Mode=OneWay}" />
-    </Grid>
+    <Border Grid.Row="1"
+            Margin="-10 30 -10 30"
+            Padding="0"
+            CornerRadius="9"
+            BorderBrush="#D6D5D5"
+            BorderThickness="0.4">
+        <Border.Background>
+            <SolidColorBrush Color="Gray"
+                             Opacity="0.08" />
+        </Border.Background>
+        <Grid Margin="7 7 7 7">
+
+            <ui:VirtualizingItemsControl Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                             VirtualizingPanel.CacheLengthUnit="Item">
+                <ui:CardAction Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="12,12,0,0"
+                               Padding="0"
+                               Width="235"
+                               VerticalAlignment="Stretch"
+                               CommandParameter="BasicInput"
+                               IsChevronVisible="False">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border Margin="5" 
+                                CornerRadius="10">
+                            <Border.Background>
+                                <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                            </Border.Background>
+                            <StackPanel VerticalAlignment="Center" 
+                                        Margin="7.5 10 7.5 0">
+                                <ui:SymbolIcon Symbol="MoviesAndTv20" 
+                                           Width="40" 
+                                           Height="40" 
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="40"/>
+                                <TextBlock Margin="0 10 "
+                                       FontSize="13"
+                                       Text="نام کارگردان"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="calibri"
+                                       VerticalAlignment="Center"
+                                       FlowDirection="RightToLeft" />
+
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Margin="5" 
+                                Grid.Column="1"
+                                CornerRadius="10">
+                            <Border.Background>
+                                <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                            </Border.Background>
+                            <StackPanel VerticalAlignment="Center"
+                                        Margin="7.5 10 7.5 0">
+                                <Border CornerRadius="90" 
+                                        Width="40"
+                                        Height="40">
+                                    <TextBlock Text="امتیاز"
+                                               FontSize="16"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontFamily="calibri"></TextBlock>
+                                </Border>
+                                <ui:RatingControl Grid.Column="1"
+                                                  FontSize="12"
+                                                  Grid.Row="2"
+                                                  Margin=" 0 0 "
+                                                  IsEnabled="False"
+                                                  FlowDirection="LeftToRight"
+                                                  HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Margin="5" 
+                                Grid.Column="2"
+                                CornerRadius="10">
+                            <Border.Background>
+                                <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                            </Border.Background>
+                            <StackPanel VerticalAlignment="Center"
+                                        Margin="7.5 10 7.5 0">
+                                <ui:SymbolIcon Symbol="CalendarRtl16" 
+                                           Width="40" 
+                                           Height="40" 
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="40"/>
+
+                                <TextBlock Margin="0 10"
+                                                   FontSize="13"
+                                                   Text="سال ساخت"
+                                                   TextWrapping="WrapWithOverflow"
+                                                   HorizontalAlignment="Center"
+                                                   FontFamily="calibri"
+                                                   VerticalAlignment="Center"
+                                                   FlowDirection="RightToLeft"/>
+
+                            </StackPanel>
+                        </Border>
+
+                        <Border Margin="5 4 5 5" Grid.Row="1" Grid.ColumnSpan="3" Width="225" Height="152" CornerRadius="9">
+                            <Border.Background>
+                                <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                            </Border.Background>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Border CornerRadius="15" Margin="8 8 8 4">
+                                    <Border.Background >
+                                        <ImageBrush ImageSource="/Assets/Background.png"/>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Grid.Row="1" 
+                                           HorizontalAlignment="Center"
+                                           FontFamily="calibri" 
+                                           Margin="0 0 0 12"
+                                           Text="عنوان فیلم"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ui:CardAction>
+            </ui:VirtualizingItemsControl>
+        </Grid>
+    </Border>
 </Page>

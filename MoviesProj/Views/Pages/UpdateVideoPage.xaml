@@ -52,13 +52,15 @@
                                Filled="True"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Bottom" 
-                               FontSize="7"/>
+                               FontSize="6"
+                               Foreground="#FF949494"/>
                 <ui:SymbolIcon Grid.Row="1"
                                Symbol="Circle16"
                                Filled="True" 
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Bottom" 
-                               FontSize="7"/>
+                               FontSize="6"
+                               Foreground="#FF949494"/>
                 <Grid Grid.Column="1"
                       Grid.RowSpan="2"
                       Grid.ColumnSpan="4" 
