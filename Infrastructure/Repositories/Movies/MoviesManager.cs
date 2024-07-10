@@ -22,6 +22,7 @@ namespace EntityFreamewoerkCore.Movies
             int pageCount)
 
         {
+
             var query = (from mov in DbContext.Set<Movie>()
                           .AsNoTracking()
                           .Where(t => string.IsNullOrEmpty(name) || t.Name.Contains(name))
@@ -46,11 +47,13 @@ namespace EntityFreamewoerkCore.Movies
                              cat.Id
                          )).AsQueryable();
 
+
             return new PagedResulViewModel<MoviListViewModel>(
                 await query.CountAsync(),
                 pageCount,
                 pageNum,
                 await query.Skip(--pageNum * pageCount).Take(pageCount).ToListAsync());
+
         }
 
 

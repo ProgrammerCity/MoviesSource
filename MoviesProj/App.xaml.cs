@@ -60,10 +60,11 @@ namespace MoviesProj
                 services.AddSingleton<DashboardViewModel>();
 
                 services.AddSingleton<CreateMoviesPage>();
-                //services.AddSingleton<MoviesViewModel>();
+                services.AddSingleton<CreateMoviesViewModel>();
 
                 services.AddSingleton<MoviesListPage>();
                 services.AddSingleton<MoviesListViewModel>();
+
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 

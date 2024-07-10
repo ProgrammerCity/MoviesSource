@@ -1,4 +1,6 @@
 ﻿using Domain.IRepositories;
+using MoviesProj.Models;
+using System.Collections.ObjectModel;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
@@ -33,6 +35,13 @@ namespace MoviesProj.ViewModels.Pages
 
         [ObservableProperty]
         private string _directorName = default!;
+
+        [ObservableProperty]
+        private ObservableCollection<ListViewDto> _genreList = new ObservableCollection<ListViewDto>()
+        {
+            new("comedi"),
+            new("jenaee")
+        };
 
 
         public void OnNavigatedTo()
