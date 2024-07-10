@@ -30,18 +30,6 @@ namespace EntityCore.Data
                r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
                j => j.HasKey("GenreId", "MvoieId"));
 
-            //builder.Entity<MovieGenre>()
-            //.HasKey(bc => new { bc.MovieId, bc.GenreId });
-
-            //builder.Entity<MovieGenre>()
-            //.HasOne(bc => bc.Movie)
-            //.WithMany(c => c.MovieGenre)
-            //.HasForeignKey(bc => bc.MovieId);
-
-            //builder.Entity<MovieGenre>()
-            //.HasOne(bc => bc.Genre)
-            //.WithMany(c => c.MovieGenre)
-            //.HasForeignKey(bc => bc.GenreId);
             #endregion
 
             #region ManyToManyMovieCategury
@@ -52,19 +40,6 @@ namespace EntityCore.Data
                l => l.HasOne(typeof(Categury)).WithMany().HasForeignKey("CateguryId").HasPrincipalKey(nameof(Categury.Id)),
                r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
                j => j.HasKey("CateguryId", "MvoieId"));
-
-            //builder.Entity<MovieCategury>()
-            //.HasKey(bc => new { bc.MovieId, bc.CateguryId });
-
-            //builder.Entity<MovieCategury>()
-            //.HasOne(bc => bc.Movie)
-            //.WithMany(c => c.MovieCategury)
-            //.HasForeignKey(bc => bc.MovieId);
-
-            //builder.Entity<MovieCategury>()
-            //.HasOne(bc => bc.Categury)
-            //.WithMany(c => c.MovieCategury)
-            //.HasForeignKey(bc => bc.MovieId);
             #endregion
 
 
@@ -73,14 +48,14 @@ namespace EntityCore.Data
                 b.HasIndex(t => t.Id);
                 b.Property(t => t.Name).IsRequired();
             });
-            
+
             builder.Entity<Genre>(b =>
             {
                 b.HasIndex(t => t.Id);
                 b.Property(t => t.Titele).IsRequired();
             });
         }
-        
+
         /// <summary>
         /// Set NEWSEQUENTIALID() sql function for all columns named "Id"
         /// </summary>
