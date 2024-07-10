@@ -1,4 +1,5 @@
 ﻿using Domain.Models.Catequries;
+using Domain.Models.Genres;
 using Domain.Models.Movies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -12,39 +13,71 @@ namespace EntityCore.Data
         public static void ConfigureNovinDbContext(this ModelBuilder builder)
         {
 
-            //builder.Entity<Customer>(b =>
-            //{
-            //    b.HasIndex(b => b.Id);
-            //    b.Property(b => b.CusId).IsRequired().ValueGeneratedOnAdd().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
-            //    b.Property(r => r.Name).HasMaxLength(50).IsRequired();
-            //    b.Property(r => r.NationalCode).HasMaxLength(12).IsRequired();
-            //    b.Property(r => r.Mobile).HasMaxLength(20).IsRequired();
-            //    b.Property(r => r.Address).HasMaxLength(150);
-            //    b.Property(r => r.IsActive).HasDefaultValue(true);
-            //});
-
             builder.Entity<Movie>(b =>
             {
                 b.HasIndex(t => t.Id);
                 b.Property(t => t.Name).IsRequired().HasMaxLength(50);
                 b.Property(t => t.DirectorName).IsRequired().HasMaxLength(50);
-
-                //b.HasOne(t => t.Categury)
-                // .WithMany(t => t.Movies)
-                // .HasForeignKey(t => t.CateguryId)
-                // .OnDelete(DeleteBehavior.Cascade); 
-                
-                //b.HasOne(t => t.Genre)
-                // .WithMany(t => t.Movies)
-                // .HasForeignKey(t => t.GenreId)
-                // .OnDelete(DeleteBehavior.Cascade); ;
             });
-            
-            
+
+
+            #region ManyToManyMovieGenre
+            builder.Entity<Movie>()
+              .HasMany(e => e.Genres)
+              .WithMany(e => e.Movies)
+              .UsingEntity("MovieGenre",
+               l => l.HasOne(typeof(Genre)).WithMany().HasForeignKey("GenreId").HasPrincipalKey(nameof(Genre.Id)),
+               r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
+               j => j.HasKey("GenreId", "MvoieId"));
+
+            //builder.Entity<MovieGenre>()
+            //.HasKey(bc => new { bc.MovieId, bc.GenreId });
+
+            //builder.Entity<MovieGenre>()
+            //.HasOne(bc => bc.Movie)
+            //.WithMany(c => c.MovieGenre)
+            //.HasForeignKey(bc => bc.MovieId);
+
+            //builder.Entity<MovieGenre>()
+            //.HasOne(bc => bc.Genre)
+            //.WithMany(c => c.MovieGenre)
+            //.HasForeignKey(bc => bc.GenreId);
+            #endregion
+
+            #region ManyToManyMovieCategury
+            builder.Entity<Movie>()
+              .HasMany(e => e.Categuries)
+              .WithMany(e => e.Movies)
+              .UsingEntity("MovieCategury",
+               l => l.HasOne(typeof(Categury)).WithMany().HasForeignKey("CateguryId").HasPrincipalKey(nameof(Categury.Id)),
+               r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
+               j => j.HasKey("CateguryId", "MvoieId"));
+
+            //builder.Entity<MovieCategury>()
+            //.HasKey(bc => new { bc.MovieId, bc.CateguryId });
+
+            //builder.Entity<MovieCategury>()
+            //.HasOne(bc => bc.Movie)
+            //.WithMany(c => c.MovieCategury)
+            //.HasForeignKey(bc => bc.MovieId);
+
+            //builder.Entity<MovieCategury>()
+            //.HasOne(bc => bc.Categury)
+            //.WithMany(c => c.MovieCategury)
+            //.HasForeignKey(bc => bc.MovieId);
+            #endregion
+
+
             builder.Entity<Categury>(b =>
             {
                 b.HasIndex(t => t.Id);
                 b.Property(t => t.Name).IsRequired();
+            });
+            
+            builder.Entity<Genre>(b =>
+            {
+                b.HasIndex(t => t.Id);
+                b.Property(t => t.Titele).IsRequired();
             });
         }
         

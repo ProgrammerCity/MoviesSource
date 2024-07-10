@@ -2,19 +2,15 @@
 using Domain.Models.Catequries;
 using Domain.Models.Genres;
 using DomainShared.Error;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Domain.Models.Movies
 {
     public class Movie : AuditedEntity<Guid>
     {
         #region Navigatoin
-        //public Categury Categury { get; private set; } = new();
-        public Guid CateguryId { get; private set; }
+        public List<Categury> Categuries{ get; } = [];
 
-        //public Genre Genre { get; private set; } = new();
-        public Guid GenreId { get; private set; }
+        public List<Genre> Genres{ get; } = [];
         #endregion
 
         #region Properties
@@ -31,7 +27,7 @@ namespace Domain.Models.Movies
         }
 
         public Movie(Guid id,
-            Guid categuryId,
+            Guid categuriesId,
             string name,
             Guid genre,
             float rate,
@@ -39,7 +35,7 @@ namespace Domain.Models.Movies
             string directorName)
         {
             Id = id;
-            SetCategury(categuryId);
+            //SetCateguries(categuriesId);
             SetName(name);
             SetGenre(genre);
             SetRate(rate);
@@ -91,18 +87,18 @@ namespace Domain.Models.Movies
             {
                 throw new ArgumentException(CoreError.IsMandatory("شناسه ژانر"));
             }
-            GenreId = genreId;
+            //GenreId = genreId;
             return this;
 
         }
 
-        public Movie SetCategury(Guid catequryId)
+        public Movie SetCateguries(List<Categury> categuries)
         {
-            if (catequryId == Guid.Empty)
-            {
-                throw new ArgumentException(CoreError.IsMandatory("شناسه گروه"));
-            }
-            CateguryId = catequryId;
+            //if (categuries.Count == 0)
+            //{
+            //    throw new ArgumentException("افزودن حداقل یک دسته الزامیست!!!");
+            //}
+            //MovieCategury.AddRange(categuries.Select(t=> new Movies.MovieCategury() { CateguryId = t.CreatorId}))
             return this;
 
         }
@@ -116,7 +112,7 @@ namespace Domain.Models.Movies
 
             if (name.Length > 50)
             {
-                throw new ArgumentException(CoreError.IsLess("نام فیلم","پنجاه"));
+                throw new ArgumentException(CoreError.IsLess("نام فیلم", "پنجاه"));
             }
             Name = name;
             return this;
@@ -124,4 +120,19 @@ namespace Domain.Models.Movies
     }
     #endregion
 
+    //public class MovieGenre
+    //{
+    //    public Guid MovieId { get; set; }
+    //    public Guid GenreId { get; set; }
+    //    public Genre Genre { get; set; } = default!;
+    //    public Movie Movie { get; set; } = default!;
+    //}
+
+    //public class MovieCategury
+    //{
+    //    public Guid MovieId { get; set; }
+    //    public Guid CateguryId { get; set; }
+    //    public Categury Categury { get; set; } = default!;
+    //    public Movie Movie { get; set; } = default!;
+    //}
 }

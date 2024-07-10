@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EntityFreamewoerkCore.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class initDatabase : Migration
@@ -54,10 +54,10 @@ namespace EntityFreamewoerkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWSEQUENTIALID()"),
-                    CateguryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GenreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rate = table.Column<byte>(type: "tinyint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DirectorName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ConstructionYear = table.Column<int>(type: "int", nullable: false),
+                    Rate = table.Column<float>(type: "real", nullable: false),
                     DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -69,16 +69,52 @@ namespace EntityFreamewoerkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movie", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieCategury",
+                columns: table => new
+                {
+                    CateguryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MvoieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieCategury", x => new { x.CateguryId, x.MvoieId });
                     table.ForeignKey(
-                        name: "FK_Movie_Categury_CateguryId",
+                        name: "FK_MovieCategury_Categury_CateguryId",
                         column: x => x.CateguryId,
                         principalTable: "Categury",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Movie_Genre_GenreId",
+                        name: "FK_MovieCategury_Movie_MvoieId",
+                        column: x => x.MvoieId,
+                        principalTable: "Movie",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieGenre",
+                columns: table => new
+                {
+                    GenreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MvoieId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieGenre", x => new { x.GenreId, x.MvoieId });
+                    table.ForeignKey(
+                        name: "FK_MovieGenre_Genre_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genre",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieGenre_Movie_MvoieId",
+                        column: x => x.MvoieId,
+                        principalTable: "Movie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -89,32 +125,43 @@ namespace EntityFreamewoerkCore.Migrations
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movie_CateguryId",
-                table: "Movie",
-                column: "CateguryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movie_GenreId",
-                table: "Movie",
-                column: "GenreId");
+                name: "IX_Genre_Id",
+                table: "Genre",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movie_Id",
                 table: "Movie",
                 column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieCategury_MvoieId",
+                table: "MovieCategury",
+                column: "MvoieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieGenre_MvoieId",
+                table: "MovieGenre",
+                column: "MvoieId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "MovieCategury");
+
+            migrationBuilder.DropTable(
+                name: "MovieGenre");
 
             migrationBuilder.DropTable(
                 name: "Categury");
 
             migrationBuilder.DropTable(
                 name: "Genre");
+
+            migrationBuilder.DropTable(
+                name: "Movie");
         }
     }
 }

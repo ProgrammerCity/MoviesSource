@@ -26,37 +26,25 @@ namespace EntityFreamewoerkCore.Movies
                           .AsNoTracking()
                           .Where(t => string.IsNullOrEmpty(name) || t.Name.Contains(name))
                           .Where(t => string.IsNullOrEmpty(directorName) || t.DirectorName.Contains(directorName))
-                          .Where(t => genreId == null || t.GenreId == genreId)
-                          .Where(t => catequryId == null || t.CateguryId == catequryId)
+                          //.Where(t => genreId == null || t.Genres.Contains(genreId.Value))
+                          //.Where(t => catequryId == null || t.CateguryId == catequryId)
                           .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
                           .Where(t => rate == null || t.Rate == rate)
 
-                  join cat in DbContext.Set<Categury>()
-                           on mov.CateguryId equals cat.Id
+                         join cat in DbContext.Set<Categury>()
+                                  on mov.CateguryId equals cat.Id
 
-                  join gen in DbContext.Set<Genre>()
-                           on mov.GenreId equals gen.Id
+                         join gen in DbContext.Set<Genre>()
+                                  on mov.GenreId equals gen.Id
 
-                           select new MoviListViewModel(
-                               cat.Name,
-                               cat.Name,
-                               gen.Titele,
-                               mov.Rate,
-                               gen.Id,
-                               cat.Id
-                           )).AsQueryable();
-
-
-
-            //var query = TableNoTracking
-            //    .Where(t => string.IsNullOrEmpty(name) || t.Name.Contains(name))
-            //    .Where(t => string.IsNullOrEmpty(directorName) || t.DirectorName.Contains(directorName))
-            //    .Where(t => genreId == null || t.GenreId == genreId)
-            //    .Where(t => catequryId == null || t.CateguryId == catequryId)
-            //    .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
-            //    .Where(t => rate == null || t.Rate == rate)
-            //    .Select(t => new MoviesListViewModel(t.Name, "t.Categury.Name", "t.Genre.Titele", t.Rate, t.GenreId, t.CateguryId))
-            //.AsQueryable();
+                         select new MoviListViewModel(
+                             cat.Name,
+                             cat.Name,
+                             gen.Titele,
+                             mov.Rate,
+                             gen.Id,
+                             cat.Id
+                         )).AsQueryable();
 
             return new PagedResulViewModel<MoviListViewModel>(
                 await query.CountAsync(),
@@ -105,7 +93,7 @@ namespace EntityFreamewoerkCore.Movies
             {
                 movie.SetName(name);
                 movie.SetGenre(gereId);
-                movie.SetCategury(categuryId);
+                //movie.SetCategury(categuryId);
                 movie.SetRate(rate);
                 movie.SetCustructionYear(constructionYear);
                 movie.SetDirectorNam(directorName);

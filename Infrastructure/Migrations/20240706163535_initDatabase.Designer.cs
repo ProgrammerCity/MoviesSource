@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EntityFreamewoerkCore.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MainApplicationDbContext))]
-    [Migration("20240706084925_changeRate")]
-    partial class changeRate
+    [Migration("20240706163535_initDatabase")]
+    partial class initDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,8 @@ namespace EntityFreamewoerkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Id");
+
                     b.ToTable("Genre");
                 });
 
@@ -107,9 +109,6 @@ namespace EntityFreamewoerkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
-
-                    b.Property<Guid>("CateguryId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ConstructionYear")
                         .HasColumnType("int");
@@ -131,9 +130,6 @@ namespace EntityFreamewoerkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("GenreId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -153,38 +149,69 @@ namespace EntityFreamewoerkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CateguryId");
-
-                    b.HasIndex("GenreId");
-
                     b.HasIndex("Id");
 
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("Domain.Models.Movies.Movie", b =>
+            modelBuilder.Entity("MovieCategury", b =>
+                {
+                    b.Property<Guid>("CateguryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MvoieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CateguryId", "MvoieId");
+
+                    b.HasIndex("MvoieId");
+
+                    b.ToTable("MovieCategury");
+                });
+
+            modelBuilder.Entity("MovieGenre", b =>
+                {
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MvoieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GenreId", "MvoieId");
+
+                    b.HasIndex("MvoieId");
+
+                    b.ToTable("MovieGenre");
+                });
+
+            modelBuilder.Entity("MovieCategury", b =>
                 {
                     b.HasOne("Domain.Models.Catequries.Categury", null)
-                        .WithMany("Movies")
+                        .WithMany()
                         .HasForeignKey("CateguryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.Genres.Genre", null)
-                        .WithMany("Movies")
-                        .HasForeignKey("GenreId")
+                    b.HasOne("Domain.Models.Movies.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MvoieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Models.Catequries.Categury", b =>
+            modelBuilder.Entity("MovieGenre", b =>
                 {
-                    b.Navigation("Movies");
-                });
+                    b.HasOne("Domain.Models.Genres.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Domain.Models.Genres.Genre", b =>
-                {
-                    b.Navigation("Movies");
+                    b.HasOne("Domain.Models.Movies.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MvoieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
