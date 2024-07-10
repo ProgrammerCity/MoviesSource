@@ -58,10 +58,10 @@ namespace MoviesProj.ViewModels.Pages
         {
             _isInit = true;
             var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
-            CurrentPage = t.CurrentPage;
-            List = t.Items;
-            PageCount = t.PageCount;
-            _isInit = false;
+            //CurrentPage = t.CurrentPage;
+            //List = t.Items;
+            //PageCount = t.PageCount;
+            //_isInit = false;
         }
 
         [RelayCommand]
