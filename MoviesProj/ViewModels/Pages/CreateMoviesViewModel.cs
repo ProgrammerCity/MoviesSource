@@ -1,4 +1,6 @@
 ﻿using Domain.IRepositories;
+using DomainShared.ViewModels.Categuries;
+using DomainShared.ViewModels.Genres;
 using MoviesProj.Models;
 using System.Collections.ObjectModel;
 using Wpf.Ui;
@@ -25,10 +27,10 @@ namespace MoviesProj.ViewModels.Pages
         private float _rate;
 
         [ObservableProperty]
-        private Guid _genreId;
+        private List<Guid> _genresId;
 
         [ObservableProperty]
-        private Guid _catequryId;
+        private List<Guid> _catequriesId;
 
         [ObservableProperty]
         private string _name = default!;
@@ -37,12 +39,10 @@ namespace MoviesProj.ViewModels.Pages
         private string _directorName = default!;
 
         [ObservableProperty]
-        private ObservableCollection<ListViewDto> _genreList = new ObservableCollection<ListViewDto>()
-        {
-            new("comedi"),
-            new("jenaee")
-        };
+        private ObservableCollection<GenresListViewModel> _genreList;
 
+        [ObservableProperty]
+        private ObservableCollection<CateguryListViewModel> _categuryList;
 
         public void OnNavigatedTo()
         {
@@ -51,14 +51,16 @@ namespace MoviesProj.ViewModels.Pages
 
         public void OnNavigatedFrom() { }
 
-        private void InitializeViewModel()
+        private async void InitializeViewModel()
         {
+            CateguryList =new ObservableCollection<CateguryListViewModel>(await _unitOfWork.CateguryRepository.GetCateguryList());
+            GenreList = new ObservableCollection<GenresListViewModel>(await _unitOfWork.GenresRepository.GetGenresList());
         }
 
         [RelayCommand]
         private async Task OnSumbit(Type pageType)
         {
-            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
+            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequriesId, GenresId, ConstructionYear, DirectorName);
             if (!isSuccess)
             {
                 _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));

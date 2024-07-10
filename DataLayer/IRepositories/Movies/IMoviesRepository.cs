@@ -17,18 +17,18 @@ namespace Domain.Movies
             int pageCount);
 
         Task<(string error, bool isSuccess)> Create(string name,
-            float rate,
-            Guid categuryId, 
-            Guid gereId,
-            int constructionYear,
-            string directorName);
+             float rate,
+             List<Guid> categuries,
+             List<Guid> genres,
+             int constructionYear,
+             string directorName);
 
         Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
-            string name,
-            float rate,
-            Guid categuryId,
-            Guid gereId,
-            int constructionYear,
-            string directorName);
+             string name,
+             float rate,
+             List<Guid> categuries,
+             List<Guid> genres,
+             int constructionYear,
+             string directorName);
     }
 }

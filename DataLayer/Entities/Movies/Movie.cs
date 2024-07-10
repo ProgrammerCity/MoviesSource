@@ -27,17 +27,17 @@ namespace Domain.Models.Movies
         }
 
         public Movie(Guid id,
-            Guid categuriesId,
+            List<Categury> categuries,
             string name,
-            Guid genre,
+            List<Genre> genres,
             float rate,
             int constructionYear,
             string directorName)
         {
             Id = id;
-            //SetCateguries(categuriesId);
+            SetCateguries(categuries);
             SetName(name);
-            SetGenre(genre);
+            SetGenre(genres);
             SetRate(rate);
             SetDirectorNam(directorName);
             SetCustructionYear(constructionYear);
@@ -81,24 +81,26 @@ namespace Domain.Models.Movies
             return this;
         }
 
-        public Movie SetGenre(Guid genreId)
+        public Movie SetGenre(List<Genre> genres)
         {
-            if (genreId == Guid.Empty)
+            if (genres.Count == 0)
             {
-                throw new ArgumentException(CoreError.IsMandatory("شناسه ژانر"));
+                throw new ArgumentException("افزودن حداقل یک ژانر الزامیست!!!");
             }
-            //GenreId = genreId;
+            Genres.Clear();
+            Genres.AddRange(genres);
             return this;
 
         }
 
         public Movie SetCateguries(List<Categury> categuries)
         {
-            //if (categuries.Count == 0)
-            //{
-            //    throw new ArgumentException("افزودن حداقل یک دسته الزامیست!!!");
-            //}
-            //MovieCategury.AddRange(categuries.Select(t=> new Movies.MovieCategury() { CateguryId = t.CreatorId}))
+            if (categuries.Count == 0)
+            {
+                throw new ArgumentException("افزودن حداقل یک دسته الزامیست!!!");
+            }
+            Categuries.Clear();
+            Categuries.AddRange(categuries);
             return this;
 
         }
@@ -119,20 +121,4 @@ namespace Domain.Models.Movies
         }
     }
     #endregion
-
-    //public class MovieGenre
-    //{
-    //    public Guid MovieId { get; set; }
-    //    public Guid GenreId { get; set; }
-    //    public Genre Genre { get; set; } = default!;
-    //    public Movie Movie { get; set; } = default!;
-    //}
-
-    //public class MovieCategury
-    //{
-    //    public Guid MovieId { get; set; }
-    //    public Guid CateguryId { get; set; }
-    //    public Categury Categury { get; set; } = default!;
-    //    public Movie Movie { get; set; } = default!;
-    //}
 }
