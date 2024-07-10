@@ -141,17 +141,17 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0"
-                                       FontFamily="Calibri"
-                                       FontSize="15"
-                                       Text="ژانر"
-                                       Margin="2 0 0 10 " />
-                        <ui:ListView
-                            Grid.Row="1"
-                            MaxHeight="200"
-                            d:ItemsSource="{d:SampleData ItemCount=3}"
-                            ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
-                            SelectedIndex="2"
-                            SelectionMode="Multiple">
+                                   FontFamily="Calibri"
+                                   FontSize="15"
+                                   Text="ژانر"
+                                   Margin="2 0 0 10 " />
+                        <ui:ListView Grid.Row="1"
+                                     MaxHeight="300"
+                                     x:Name="lst_Gen"
+                                     d:ItemsSource="{d:SampleData ItemCount=3}"
+                                     ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
+                                     SelectedIndex="2"
+                                     SelectionMode="Multiple">
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:ListViewDto}">
                                     <TextBlock Margin="8,4" Text="{Binding Titele, Mode=OneWay}" />
@@ -172,13 +172,12 @@
                                        Text="بازیگران"
                                        Margin="2 0 0 10 " />
 
-                        <ui:ListView
-                    Grid.Row="1"
-                    MaxHeight="200"
-                    d:ItemsSource="{d:SampleData ItemCount=2}"
-                    ItemsSource="{Binding ViewModel.GenreList, Mode=TwoWay}"
-                    SelectedIndex="1"
-                    SelectionMode="Multiple">
+                        <ui:ListView Grid.Row="1"
+                                     MaxHeight="200"
+                                     d:ItemsSource="{d:SampleData ItemCount=2}"
+                                     ItemsSource="{Binding ViewModel.GenreList, Mode=TwoWay}"
+                                     SelectedIndex="1"
+                                     SelectionMode="Multiple">
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:ListViewDto}">
                                     <Grid Margin="8,0">
@@ -199,13 +198,13 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Fill="{ui:ThemeResource ControlStrongStrokeColorDefaultBrush}" />
-                                       <TextBlock
+                                        <TextBlock
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             Margin="12,6,0,0"
                                             FontWeight="Bold"
                                             Text="{Binding Titele, Mode=OneWay}" />
-                                       <TextBlock
+                                        <TextBlock
                                             Grid.Row="1"
                                             Grid.Column="1"
                                             Margin="12,0,0,6"
