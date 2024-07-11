@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:MoviesProj.Views.Pages"
-      xmlns:models="clr-namespace:MoviesProj.Models"
+      xmlns:models="clr-namespace:MoviesProj.Models" xmlns:nu="clr-namespace:NeAccounting.Controls"
       mc:Ignorable="d"
       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -17,100 +17,101 @@
 
         </Border.Background>
 
-    <Grid FlowDirection="RightToLeft">
-        <Border Opacity=".8" CornerRadius="15" Margin="40" Background="Black">
-            <Border.Effect>
-                <BlurEffect Radius="10" KernelType="Gaussian"/>
-            </Border.Effect>
-        </Border>
-        <Border  Margin="57" >
+        <Grid FlowDirection="RightToLeft">
+            <Border Opacity=".8" CornerRadius="15" Margin="40" Background="Black">
+                <Border.Effect>
+                    <BlurEffect Radius="10" KernelType="Gaussian"/>
+                </Border.Effect>
+            </Border>
+            <Border  Margin="57" >
 
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <ui:SymbolIcon Symbol="Circle16" 
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <ui:SymbolIcon Symbol="Circle16" 
                                Filled="True" 
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="6"
                                Foreground="#FF949494"/>
-                <ui:SymbolIcon Grid.Column="5"
+                    <ui:SymbolIcon Grid.Column="5"
                                Symbol="Circle16"
                                Filled="True" 
                                HorizontalAlignment="Right"
                                VerticalAlignment="Top" 
                                FontSize="6"
                                Foreground="#FF949494"/>
-                <ui:SymbolIcon Grid.Column="5"
+                    <ui:SymbolIcon Grid.Column="5"
                                Grid.Row="1"
                                Symbol="Circle16"
                                Filled="True"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Bottom" 
                                FontSize="7"/>
-                <ui:SymbolIcon Grid.Row="1"
+                    <ui:SymbolIcon Grid.Row="1"
                                Symbol="Circle16"
                                Filled="True" 
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Bottom" 
                                FontSize="7"/>
 
-                <StackPanel Margin="20 0 0 0 ">
+                    <StackPanel Margin="20 0 0 0 ">
 
-                    <TextBlock FontFamily="Calibri"
+                        <TextBlock FontFamily="Calibri"
                                            FontSize="15"
                                            Text="عنوان فیلم"
                                            Margin="2 0 0 0 " />
-                    <ui:TextBox TextAlignment="Center"
+                        <ui:TextBox TextAlignment="Center"
                                             x:Name="CusName_txt"
                                             TabIndex="1"
                                             ClearButtonEnabled="False"
                                             FontFamily="Calibri"
                                             Margin="0 4 0 0" />
-                </StackPanel>
+                    </StackPanel>
 
-                <StackPanel Grid.Column="1"
+                    <StackPanel Grid.Column="1"
                                         Margin="20 0 0 0 ">
 
-                    <TextBlock FontFamily="Calibri"
+                        <TextBlock FontFamily="Calibri"
                                            FontSize="15"
                                            Text="سال ساخت"
                                            Margin="2 0 0 0 " />
-                    <ui:TextBox TextAlignment="Center"
+                        <ui:TextBox TextAlignment="Center"
                                             FontFamily="Calibri"
                                             ClearButtonEnabled="False"
                                             TabIndex="0"
                                             Margin="0 4 0 0" />
 
-                </StackPanel>
+                    </StackPanel>
 
-                <StackPanel Grid.Column="2"
+                    <StackPanel Grid.Column="2"
                                         Margin="20 0 0 0">
-                    <TextBlock FontFamily="Calibri"
+                        <TextBlock FontFamily="Calibri"
                                            FontSize="15"
                                            Text="ژانر"
                                            Margin="2 0 0 0 " />
-                    <ui:TextBox TextAlignment="Center"
+                        <ui:TextBox TextAlignment="Center"
                                             TabIndex="3"
                                             ClearButtonEnabled="False"
                                             FontFamily="Calibri"
                                             Margin="0 4 0 0" />
-                </StackPanel>
+                    </StackPanel>
 
-                <Button Grid.Column="3"
+                    <Button Grid.Column="3"
                                     Margin="20 22.3 0 -5"
                                     Padding="17 4 17 4"
                                     HorizontalAlignment="Left"
                                     IsDefault="True">جستجو</Button>
-                <DataGrid Grid.Row="1"
+                    <DataGrid Grid.Row="1"
                           Padding="7"
                           FontSize="15"
                           Grid.RowSpan="2"
@@ -124,84 +125,89 @@
                           CanUserResizeColumns="False"
                           CanUserReorderColumns="False">
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="عنوان فیلم"
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="عنوان فیلم"
                                                     HeaderStyle="{DynamicResource CenterGridHeaderStyle}"
                                                     ElementStyle="{StaticResource CenterDtaGridCell}"
                                                     Width="*" >
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="ToolTip">
-                                        <Setter.Value>
-                                            <TextBlock FontSize='17' />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock FontSize='17' />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
 
-                        <DataGridTextColumn Header="سال ساخت"
+                            <DataGridTextColumn Header="سال ساخت"
                                                     ElementStyle="{StaticResource CenterDtaGridCell}"
                                                     HeaderStyle="{DynamicResource CenterGridHeaderStyle}"
                                                     Width=".75*" >
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="ToolTip">
-                                        <Setter.Value>
-                                            <TextBlock FontSize='17'/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock FontSize='17'/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
 
 
-                        <DataGridTextColumn Header="ژانر"
+                            <DataGridTextColumn Header="ژانر"
                                                     ElementStyle="{StaticResource CenterDtaGridCell}"
                                                     HeaderStyle="{DynamicResource CenterGridHeaderStyle}"
                                                     Width=".5*" >
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="ToolTip">
-                                        <Setter.Value>
-                                            <TextBlock FontSize='17' />
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip">
+                                            <Setter.Value>
+                                                <TextBlock FontSize='17' />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
 
 
-                        <DataGridTemplateColumn Header="عملیات"
+                            <DataGridTemplateColumn Header="عملیات"
                                                         Width="70"
                                                         HeaderStyle="{DynamicResource CenterGridHeaderStyle}">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal"
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center">
-                                        <Button  Margin="5"
+                                            <Button  Margin="5"
                                                          Padding="7,5">
-                                            <Button.ToolTip>
-                                                <TextBlock FontSize="14">ویرایش</TextBlock>
-                                            </Button.ToolTip>
-                                            <ui:SymbolIcon Symbol="Pen16" />
-                                        </Button>
-                                        <CheckBox Margin="5 0 -5 0"
+                                                <Button.ToolTip>
+                                                    <TextBlock FontSize="14">ویرایش</TextBlock>
+                                                </Button.ToolTip>
+                                                <ui:SymbolIcon Symbol="Pen16" />
+                                            </Button>
+                                            <CheckBox Margin="5 0 -5 0"
                                                           Padding="0">
-                                            <CheckBox.ToolTip>
-                                                <TextBlock FontSize="16">بایگانی</TextBlock>
-                                            </CheckBox.ToolTip>
-                                        </CheckBox>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                                <CheckBox.ToolTip>
+                                                    <TextBlock FontSize="16">بایگانی</TextBlock>
+                                                </CheckBox.ToolTip>
+                                            </CheckBox>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <nu:Pagination Grid.Row="2"
+                                   Grid.Column="1"
+                                   Grid.ColumnSpan="2"
+                                   HorizontalAlignment="Center"
+                                   FlowDirection="LeftToRight" />
 
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
 
-    </Grid>
+        </Grid>
     </Border>
 </Page>
