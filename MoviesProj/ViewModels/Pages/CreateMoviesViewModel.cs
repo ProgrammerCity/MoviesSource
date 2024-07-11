@@ -1,7 +1,7 @@
 ﻿using Domain.IRepositories;
+using DomainShared.ViewModels.Actors;
 using DomainShared.ViewModels.Categuries;
 using DomainShared.ViewModels.Genres;
-using MoviesProj.Models;
 using System.Collections.ObjectModel;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
@@ -21,16 +21,19 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private int _constructionYear;
+        private int _constructionYear = 2000;
 
         [ObservableProperty]
-        private float _rate;
+        private float _rate = 0;
 
         [ObservableProperty]
-        private List<Guid> _genresId;
+        private List<Guid> _genresId = [];
 
         [ObservableProperty]
-        private List<Guid> _catequriesId;
+        private List<Guid> _catequriesId = [];
+
+        [ObservableProperty]
+        private List<Guid> _actorsId = [];
 
         [ObservableProperty]
         private string _name = default!;
@@ -39,13 +42,13 @@ namespace MoviesProj.ViewModels.Pages
         private string _directorName = default!;
 
         [ObservableProperty]
-        private ObservableCollection<GenresListViewModel> _genreList;
+        private ObservableCollection<GenresListViewModel> _genreList = [];
 
         [ObservableProperty]
-        private ObservableCollection<CateguryListViewModel> _categuryList;
+        private ObservableCollection<CateguryListViewModel> _categuryList = [];
 
         [ObservableProperty]
-        private ObservableCollection<ActorsListViewModel> _actorList;
+        private ObservableCollection<ActorsListViewModel> _actorList = [];
 
         public void OnNavigatedTo()
         {
@@ -56,7 +59,7 @@ namespace MoviesProj.ViewModels.Pages
 
         private async void InitializeViewModel()
         {
-            CateguryList =new ObservableCollection<CateguryListViewModel>(await _unitOfWork.CateguryRepository.GetCateguryList());
+            CateguryList = new ObservableCollection<CateguryListViewModel>(await _unitOfWork.CateguryRepository.GetCateguryList());
             GenreList = new ObservableCollection<GenresListViewModel>(await _unitOfWork.GenresRepository.GetGenresList());
             ActorList = new ObservableCollection<ActorsListViewModel>(await _unitOfWork.ActorsRepository.GetActorsList());
         }

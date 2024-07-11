@@ -11,7 +11,11 @@ namespace Infrastructure.Repositories.Categuries
     {
         public async Task<List<CateguryListViewModel>> GetCateguryList()
         {
-            return await TableNoTracking.Select(t => new CateguryListViewModel(t.Id, t.Name)).ToListAsync();
+            return await TableNoTracking.Select(t => new CateguryListViewModel()
+            {
+                Id = t.Id,
+                Name = t.Name
+            }).ToListAsync();
         }
 
         public async Task<(string error, bool isSuccess)> CreateCategury(string name)

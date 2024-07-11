@@ -26,7 +26,7 @@ namespace MoviesProj.ViewModels.Windows
                 {
                     new NavigationViewItem("ListMovies", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.MoviesListPage)),
                     new NavigationViewItem("CreateMovie", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.CreateMoviesPage)),
-                    new NavigationViewItem("update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateVideoPage)),
+                    new NavigationViewItem("update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateMoviePage)),
                 }
             },
         };

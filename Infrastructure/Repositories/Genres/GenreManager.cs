@@ -11,7 +11,11 @@ namespace Infrastructure.Repositories.Genres
     {
         public async Task<List<GenresListViewModel>> GetGenresList()
         {
-            return await TableNoTracking.Select(t => new GenresListViewModel(t.Id, t.Titele)).ToListAsync();
+            return await TableNoTracking.Select(t => new GenresListViewModel()
+            {
+                Id = t.Id,
+                Titele =  t.Titele
+            }).ToListAsync();
         }
 
         public async Task<(string error, bool isSuccess)> CreateGenre(string titele)

@@ -7,6 +7,9 @@ namespace Domain.Movies
 {
     public interface IMoviesRepository : IRepository<Movie>
     {
+
+        Task<MoviDetailsViewModel> GetMovieById(Guid id);
+
         Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
             float? rate,
             Guid? categuryId,
@@ -30,5 +33,7 @@ namespace Domain.Movies
              List<Guid> genres,
              int constructionYear,
              string directorName);
+        
+        Task<(string error, bool isSuccess)> DeleteMovie(Guid movieId);
     }
 }

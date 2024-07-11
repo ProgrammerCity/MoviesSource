@@ -52,6 +52,8 @@ namespace MoviesProj
 
                 services.AddSingleton<ISnackbarService, SnackbarService>();
 
+                services.AddSingleton<IContentDialogService, ContentDialogService>();
+
 
                 services.AddSingleton<IUnitOfWork, UnitOfWork>();
                 services.AddSingleton<MainWindowViewModel>();
@@ -68,8 +70,8 @@ namespace MoviesProj
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 
-                services.AddSingleton<UpdateVideoPage>();
-                services.AddSingleton<UpdateVideoViewModel>();
+                services.AddSingleton<UpdateMoviePage>();
+                services.AddSingleton<UpdateMovieViewModel>();
 
                 services.AddDbContext<MainApplicationDbContext>();
 

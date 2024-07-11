@@ -1,5 +1,5 @@
 ﻿using Domain.Entities.Actors;
-using DomainShared.ViewModels.Categuries;
+using DomainShared.ViewModels.Actors;
 
 namespace Domain.IRepositories.Actors
 {
