@@ -1,10 +1,9 @@
 ﻿namespace DomainShared.ViewModels.Categuries
 {
-    public record CateguryListViewModel(Guid Id,
-        string Titele);
-    
-    public record ActorsListViewModel(Guid Id,
-        string Name,
-        string Nickname,
-        string Path);
+    public record CateguryListViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = default!;
+        public bool Selected { get; set; } = false;
+    }
 }

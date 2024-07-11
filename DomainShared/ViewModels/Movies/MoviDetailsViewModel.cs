@@ -1,9 +1,11 @@
 ﻿namespace DomainShared.ViewModels.Movies
 {
-    public record MoviListViewModel(Guid Id,
+    public record MoviDetailsViewModel(Guid Id,
+        List<Guid> Catequries,
+        List<Guid> Genres,
+        List<Guid> Actors,
         string Name,
         string DirectorName,
-        string GenreTitele,
         float Rate,
         int ConstructionYear);
 }

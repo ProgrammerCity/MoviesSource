@@ -12,6 +12,25 @@ namespace EntityFreamewoerkCore.Movies
 {
     public class MoviesManager(MainApplicationDbContext context) : Repository<Movie>(context), IMoviesRepository
     {
+        public async Task<MoviDetailsViewModel> GetMovieById(Guid id)
+        {
+            var movie = await TableNoTracking
+                .Include(t => t.Categuries)
+                .Include(t => t.Genres)
+                .Include(t => t.Actors)
+                .FirstAsync(t => t.Id == id);
+            return new MoviDetailsViewModel(
+                           movie.Id,
+                           movie.Categuries.Select(c => c.Id).ToList(),
+                           movie.Genres.Select(c => c.Id).ToList(),
+                           movie.Actors.Select(c => c.Id).ToList(),
+                           movie.Name,
+                           movie.DirectorName,
+                           movie.Rate,
+                           movie.ConstructionYear);
+
+        }
+
         public async Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
             float? rate,
             Guid? catequryId,
@@ -29,12 +48,12 @@ namespace EntityFreamewoerkCore.Movies
                           //.Where(t => catequryId == null || t.CateguryId == catequryId)
                           .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
                           .Where(t => rate == null || t.Rate == rate)
-                          .Select(t => new MoviListViewModel(t.Name,
-                                  t.DirectorName,
-                                  t.Categuries.Select(c => c.Name).ToList(),
-                                  t.Genres.Select(g => g.Titele).ToList(),
-                                  t.Rate,
-                                  t.ConstructionYear)).AsQueryable();
+                          .Select(t => new MoviListViewModel(t.Id,
+                              t.Name,
+                              t.DirectorName,
+                              string.Join(',', t.Genres.Select(g => g.Titele).ToList()),
+                              t.Rate,
+                              t.ConstructionYear)).AsQueryable();
 
             return new PagedResulViewModel<MoviListViewModel>(
                 await q.CountAsync(),
@@ -103,5 +122,29 @@ namespace EntityFreamewoerkCore.Movies
             }
             return new(string.Empty, true);
         }
+
+        public async Task<(string error, bool isSuccess)> DeleteMovie(Guid movieId)
+        {
+            try
+            {
+                var movie = await Entities
+                     .FirstOrDefaultAsync(t => t.Id == movieId);
+
+                if (movie == null)
+                    return new("فیلم مورد نظر یافت نشد!!!", false);
+
+                Entities.Remove(movie);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentException aex)
+                {
+                    return new(aex.Message, false);
+                }
+                return new(" خطا در اتصال به پایگاه داده code(77t46993)!!!", false);
+            }
+            return new(string.Empty, true);
+        }
+
     }
 }
