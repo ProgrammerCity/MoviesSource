@@ -35,23 +35,16 @@ namespace EntityCore.Data
             #endregion
 
             #region ManyToManyMovieCategury
-            builder.Entity<MovieCategory>()
-            .HasKey(mc => new { mc.MovieId, mc.CategoryId });
 
-            builder.Entity<MovieCategory>()
-            .HasOne(mc => mc.Movie)
-            .WithMany(m => m.MovieCategory)
-            .HasForeignKey(mc => mc.MovieId);
-
-            //builder.Entity<Movie>()
-            //  .HasMany(e => e.Categuries)
-            //  .WithMany(e => e.Movies)
-            //  .UsingEntity("MovieCategury",
-            //   l => l.HasOne(typeof(Categury)).WithMany().HasForeignKey("CateguryId").HasPrincipalKey(nameof(Categury.Id)),
-            //   r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
-            //   j => j.HasKey("CateguryId", "MvoieId"));
+            builder.Entity<Movie>()
+              .HasMany(e => e.Categuries)
+              .WithMany(e => e.Movies)
+              .UsingEntity("MovieCategury",
+               l => l.HasOne(typeof(Categury)).WithMany().HasForeignKey("CateguryId").HasPrincipalKey(nameof(Categury.Id)),
+               r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
+               j => j.HasKey("CateguryId", "MvoieId"));
             #endregion
-            
+
             #region ManyToManyMovieActors
             builder.Entity<Movie>()
               .HasMany(e => e.Actors)

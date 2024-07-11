@@ -72,9 +72,9 @@ namespace EntityFreamewoerkCore.Movies
                     int constructionYear,
                     string directorName)
         {
-            var cats = await DbContext.Set<Categury>().AsNoTracking().Where(t => categuries.Contains(t.Id)).ToListAsync();
-            var gens = await DbContext.Set<Genre>().AsNoTracking().Where(t => genres.Contains(t.Id)).ToListAsync();
-            var acts = await DbContext.Set<Actor>().AsNoTracking().Where(t => actor.Contains(t.Id)).ToListAsync();
+            var cats = await DbContext.Set<Categury>().Where(t => categuries.Contains(t.Id)).ToListAsync();
+            var gens = await DbContext.Set<Genre>().Where(t => genres.Contains(t.Id)).ToListAsync();
+            var acts = await DbContext.Set<Actor>().Where(t => actor.Contains(t.Id)).ToListAsync();
 
             try
             {

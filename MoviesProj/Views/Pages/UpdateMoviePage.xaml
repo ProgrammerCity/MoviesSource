@@ -106,6 +106,7 @@
                                        Margin="4 0 0 0 " />
                             <ui:TextBox TextAlignment="Center"
                                         FontSize="15"
+                                        Text="{Binding ViewModel.Name, Mode=TwoWay}"
                                         Margin="0 4 0 0 "
                                         FontFamily="Calibri" />
                         </StackPanel>
@@ -116,6 +117,7 @@
                                         FontSize="15"
                                         PlaceholderText="سال ساخت"
                                         Margin="0 4 0 0 "
+                                        Text="{Binding ViewModel.ConstructionYear, Mode=TwoWay}"
                                         FontFamily="Calibri" />
                         </StackPanel>
                         <StackPanel  Grid.Row="1"
@@ -135,11 +137,13 @@
                             <ui:TextBox TextAlignment="Center"
                                         FontSize="15"
                                         PlaceholderText="کارگردان"
+                                        Text="{Binding ViewModel.DirectorName, Mode=TwoWay}"
                                         Margin="0 4 0 0 "
                                         FontFamily="Calibri" />
                         </StackPanel>
                         <ui:RatingControl Grid.Column="1"
                                           Grid.Row="2"
+                                          Value="{Binding ViewModel.Rate, Mode=TwoWay}"
                                           Margin="0 8 0 10 "
                                           FlowDirection="LeftToRight"
                                           HorizontalAlignment="Center" />
@@ -164,9 +168,10 @@
                                     BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
+                                
                                 <ui:ListView MaxHeight="200"
-                                            ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
-                                         SelectedValue="{Binding ViewModel.GenreList, Mode=OneWay}"
+                                             ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
+                                             SelectedValue="{Binding ViewModel.GenreList, Mode=TwoWay}"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type models:GenresListViewModel}">
@@ -200,10 +205,10 @@
 
                                 <ui:ListView Grid.Column="1"
                                              d:ItemsSource="{d:SampleData ItemCount=2}"
-                                         ItemsSource="{Binding ViewModel.ActorList}"
+                                             ItemsSource="{Binding ViewModel.ActorList}"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type actModels:ActorsListViewModel}">
+                                        <DataTemplate DataType="{x:Type actModels:ActorsListViewModel}">
                                             <Grid Margin="8,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*" />
@@ -228,12 +233,12 @@
                                                            Grid.Column="1"
                                                            Margin="12,6,0,0"
                                                            FontWeight="Bold"
-                                                       Text="{Binding Name, Mode=OneWay}" />
+                                                           Text="{Binding Name, Mode=OneWay}" />
                                                 <TextBlock Grid.Row="1"
                                                            Grid.Column="1"
                                                            Margin="12,0,0,6"
                                                            Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
-                                                       Text="{Binding NickName, Mode=OneWay}" />
+                                                           Text="{Binding NickName, Mode=OneWay}" />
                                             </Grid>
                                         </DataTemplate>
                                     </ui:ListView.ItemTemplate>
@@ -249,7 +254,7 @@
                                 x:Name="Btn_submit"
                                 FontFamily="Calibri"
                                 VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
+                                HorizontalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="ثبت" />
                                 <TextBlock Text=" (F1)"

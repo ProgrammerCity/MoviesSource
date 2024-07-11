@@ -22,7 +22,7 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private int _constructionYear;
+        private int? _constructionYear;
 
         [ObservableProperty]
         private float _rate;
@@ -58,7 +58,12 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task OnSumbit()
         {
-            //var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId,Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
+            if (ConstructionYear == null)
+            {
+                _snackbarService.Show("کاربر گرامی", "وارد کردن سال ساخت الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+            //var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId, Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
             //if (!isSuccess)
             //{
             //    _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));

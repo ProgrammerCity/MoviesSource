@@ -172,7 +172,7 @@
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
                                 <ui:ListView Grid.Row="1"
-                                             MaxHeight="300"
+                                             MaxHeight="115"
                                              x:Name="lst_gen"
                                              ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
                                              SelectedIndex="2"
@@ -202,8 +202,6 @@
                                        Text="دسته"
                                        Margin="2 0 0 10 " />
 
-
-
                             <Border Grid.Row="1"
                                     Padding="16"
                                     Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
@@ -211,10 +209,9 @@
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
                                 <ui:ListView Grid.Row="1"
-                                             MaxHeight="300"
+                                             MaxHeight="115"
                                              x:Name="lst_cat"
                                              ItemsSource="{Binding ViewModel.CateguryList, Mode=OneWay}"
-                                             SelectedIndex="2"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type catModels:CateguryListViewModel}">
@@ -248,7 +245,7 @@
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
                                 <ui:ListView Grid.Row="1"
-                                             MaxHeight="300"
+                                             MaxHeight="240"
                                              x:Name="lst_act"
                                              ItemsSource="{Binding ViewModel.ActorList, Mode=TwoWay}"
                                              SelectionMode="Multiple">

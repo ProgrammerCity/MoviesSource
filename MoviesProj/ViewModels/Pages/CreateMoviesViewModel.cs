@@ -2,6 +2,7 @@
 using DomainShared.ViewModels.Actors;
 using DomainShared.ViewModels.Categuries;
 using DomainShared.ViewModels.Genres;
+using MoviesProj.Views.Pages;
 using System.Collections.ObjectModel;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
@@ -81,7 +82,7 @@ namespace MoviesProj.ViewModels.Pages
            await _unitOfWork.SaveChangesAsync();
             _snackbarService.Show("کاربر گرامی", "عملیات با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
 
-            _navigationService.Navigate(pageType);
+            _navigationService.Navigate(typeof(MoviesListPage));
         }
     }
 }

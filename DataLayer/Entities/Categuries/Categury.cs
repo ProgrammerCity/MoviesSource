@@ -7,7 +7,7 @@ namespace Domain.Models.Catequries
     public class Categury : Entity<Guid>
     {
         #region Navigation
-        public List<MovieCategory> MovieCategory { get; private set; } = [];
+        public List<Movie> Movies { get; private set; } = [];
         #endregion
 
         #region Properties
@@ -17,7 +17,7 @@ namespace Domain.Models.Catequries
         #region ctor
         public Categury()
         {
-            
+
         }
 
         public Categury(Guid id,
