@@ -1,9 +1,11 @@
 ﻿using Domain.IRepositories;
+using Domain.IRepositories.Actors;
 using Domain.IRepositories.Categuries;
 using Domain.IRepositories.Genres;
 using Domain.Movies;
 using EntityCore.Data;
 using EntityFreamewoerkCore.Movies;
+using Infrastructure.Repositories.Actors;
 using Infrastructure.Repositories.Categuries;
 using Infrastructure.Repositories.Genres;
 
@@ -20,6 +22,7 @@ namespace EntityFreamewoerkCore.Data
         private IMoviesRepository? _moviesRepository;
         private ICateguryRepository? _categuryRepository;
         private IGenresRepository? _genresRepository;
+        private IActorsRepository? _actorsRepository;
 
         public IMoviesRepository MoviesRepository
         {
@@ -45,6 +48,15 @@ namespace EntityFreamewoerkCore.Data
             {
                 _genresRepository ??= new GenreManager(_mainDb);
                 return _genresRepository;
+            }
+        }
+        
+        public IActorsRepository ActorsRepository
+        {
+            get
+            {
+                _actorsRepository ??= new ActorsManager(_mainDb);
+                return _actorsRepository;
             }
         }
 

@@ -44,6 +44,9 @@ namespace MoviesProj.ViewModels.Pages
         [ObservableProperty]
         private ObservableCollection<CateguryListViewModel> _categuryList;
 
+        [ObservableProperty]
+        private ObservableCollection<ActorsListViewModel> _actorList;
+
         public void OnNavigatedTo()
         {
             InitializeViewModel();
@@ -55,6 +58,7 @@ namespace MoviesProj.ViewModels.Pages
         {
             CateguryList =new ObservableCollection<CateguryListViewModel>(await _unitOfWork.CateguryRepository.GetCateguryList());
             GenreList = new ObservableCollection<GenresListViewModel>(await _unitOfWork.GenresRepository.GetGenresList());
+            ActorList = new ObservableCollection<ActorsListViewModel>(await _unitOfWork.ActorsRepository.GetActorsList());
         }
 
         [RelayCommand]
