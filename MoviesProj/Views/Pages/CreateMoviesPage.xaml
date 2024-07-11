@@ -7,7 +7,8 @@
       xmlns:local="clr-namespace:MoviesProj.Views.Pages"
        d:DataContext="{d:DesignInstance local:CreateMoviesPage,
                                   IsDesignTimeCreatable=False}"
-      xmlns:models="clr-namespace:MoviesProj.Models"
+      xmlns:models="clr-namespace:DomainShared.ViewModels.Genres;assembly=DomainShared"
+      xmlns:catModels="clr-namespace:DomainShared.ViewModels.Categuries;assembly=DomainShared"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -153,7 +154,7 @@
                                      SelectedIndex="2"
                                      SelectionMode="Multiple">
                             <ui:ListView.ItemTemplate>
-                                <DataTemplate DataType="{x:Type models:ListViewDto}">
+                                <DataTemplate DataType="{x:Type models:GenresListViewModel}">
                                     <TextBlock Margin="8,4" Text="{Binding Titele, Mode=OneWay}" />
                                 </DataTemplate>
                             </ui:ListView.ItemTemplate>
@@ -179,7 +180,7 @@
                                      SelectedIndex="1"
                                      SelectionMode="Multiple">
                             <ui:ListView.ItemTemplate>
-                                <DataTemplate DataType="{x:Type models:ListViewDto}">
+                                <DataTemplate DataType="{x:Type catModels:CateguryListViewModel}">
                                     <Grid Margin="8,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />

@@ -29,51 +29,33 @@ namespace EntityFreamewoerkCore.Movies
                           //.Where(t => catequryId == null || t.CateguryId == catequryId)
                           .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
                           .Where(t => rate == null || t.Rate == rate)
-                          .Select(t=> new MoviListViewModel(t.Name,
+                          .Select(t => new MoviListViewModel(t.Name,
                                   t.DirectorName,
-                                  t.Categuries.Select(c=> c.Name).ToList(),
-                                  t.Genres.Select(g=> g.Titele).ToList(),
-                                  t.Rate)).AsQueryable();
-
-            //var query = (from mov in DbContext.Set<Movie>()
-
-            //              .AsNoTracking()
-            //              .Where(t => string.IsNullOrEmpty(name) || t.Name.Contains(name))
-            //              .Where(t => string.IsNullOrEmpty(directorName) || t.DirectorName.Contains(directorName))
-            //              //.Where(t => genreId == null || t.Genres.Contains(genreId.Value))
-            //              //.Where(t => catequryId == null || t.CateguryId == catequryId)
-            //              .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
-            //              .Where(t => rate == null || t.Rate == rate)
-
-            //             select new MoviListViewModel(
-            //                 cat.Name,
-            //                 cat.Name,
-            //                 gen.Titele,
-            //                 mov.Rate,
-            //                 gen.Id,
-            //                 cat.Id
-            //             )).AsQueryable();
-
+                                  t.Categuries.Select(c => c.Name).ToList(),
+                                  t.Genres.Select(g => g.Titele).ToList(),
+                                  t.Rate,
+                                  t.ConstructionYear)).AsQueryable();
 
             return new PagedResulViewModel<MoviListViewModel>(
                 await q.CountAsync(),
                 pageCount,
                 pageNum,
                 await q.Skip(--pageNum * pageCount).Take(pageCount).ToListAsync());
-
         }
 
 
         public async Task<(string error, bool isSuccess)> Create(string name,
                     float rate,
-                    Guid categuryId,
-                    Guid gereId,
+                    List<Guid> categuries,
+                    List<Guid> genres,
                     int constructionYear,
                     string directorName)
         {
+            var cats = await DbContext.Set<Categury>().AsNoTracking().Where(t => categuries.Contains(t.Id)).ToListAsync();
+            var gens = await DbContext.Set<Genre>().AsNoTracking().Where(t => genres.Contains(t.Id)).ToListAsync();
             try
             {
-                await Entities.AddAsync(new Movie(Guid.NewGuid(), categuryId, name, gereId, rate, constructionYear, directorName));
+                await Entities.AddAsync(new Movie(Guid.NewGuid(), cats, name, gens, rate, constructionYear, directorName));
             }
             catch (Exception ex)
             {
@@ -89,8 +71,8 @@ namespace EntityFreamewoerkCore.Movies
         public async Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
             string name,
             float rate,
-            Guid categuryId,
-            Guid gereId,
+            List<Guid> categuries,
+            List<Guid> genres,
             int constructionYear,
             string directorName)
         {
@@ -99,11 +81,13 @@ namespace EntityFreamewoerkCore.Movies
             if (movie == null)
                 return new("فیلم مورد نظر یافت نشد!!!", false);
 
+            var cats = await DbContext.Set<Categury>().AsNoTracking().Where(t => categuries.Contains(t.Id)).ToListAsync();
+            var gens = await DbContext.Set<Genre>().AsNoTracking().Where(t => genres.Contains(t.Id)).ToListAsync();
             try
             {
                 movie.SetName(name);
-                movie.SetGenre(gereId);
-                //movie.SetCategury(categuryId);
+                movie.SetGenre(gens);
+                movie.SetCateguries(cats);
                 movie.SetRate(rate);
                 movie.SetCustructionYear(constructionYear);
                 movie.SetDirectorNam(directorName);

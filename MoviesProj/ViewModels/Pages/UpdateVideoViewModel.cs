@@ -40,12 +40,12 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task OnSumbit(Type pageType)
         {
-            var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId,Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
-            if (!isSuccess)
-            {
-                _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
-                return;
-            }
+            //var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId,Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
+            //if (!isSuccess)
+            //{
+            //    _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+            //    return;
+            //}
             _snackbarService.Show("کاربر گرامی", "عملیات با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
 
             _navigationService.Navigate(pageType);

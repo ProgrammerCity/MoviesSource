@@ -16,5 +16,10 @@ namespace MoviesProj.Views.Pages
 
             InitializeComponent();
         }
+
+        private void Btn_submit_Click(object sender, RoutedEventArgs e)
+        {
+            //var s = lst_Gen.SelectedItems;
+        }
     }
 }

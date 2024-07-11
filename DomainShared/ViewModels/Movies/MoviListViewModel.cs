@@ -4,5 +4,6 @@
         string DirectorName,
         List<string> CateguryName,
         List<string> GenreTitele,
-        float Rate);
+        float Rate,
+        int ConstructionYear);
 }
