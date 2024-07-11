@@ -23,6 +23,7 @@ namespace Domain.Movies
              float rate,
              List<Guid> categuries,
              List<Guid> genres,
+             List<Guid> actor,
              int constructionYear,
              string directorName);
 

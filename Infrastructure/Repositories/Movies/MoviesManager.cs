@@ -1,4 +1,5 @@
-﻿using Domain.Models.Catequries;
+﻿using Domain.Entities.Actors;
+using Domain.Models.Catequries;
 using Domain.Models.Genres;
 using Domain.Models.Movies;
 using Domain.Movies;
@@ -67,14 +68,17 @@ namespace EntityFreamewoerkCore.Movies
                     float rate,
                     List<Guid> categuries,
                     List<Guid> genres,
+                    List<Guid> actor,
                     int constructionYear,
                     string directorName)
         {
             var cats = await DbContext.Set<Categury>().AsNoTracking().Where(t => categuries.Contains(t.Id)).ToListAsync();
             var gens = await DbContext.Set<Genre>().AsNoTracking().Where(t => genres.Contains(t.Id)).ToListAsync();
+            var acts = await DbContext.Set<Actor>().AsNoTracking().Where(t => actor.Contains(t.Id)).ToListAsync();
+
             try
             {
-                await Entities.AddAsync(new Movie(Guid.NewGuid(), cats, name, gens, rate, constructionYear, directorName));
+                await Entities.AddAsync(new Movie(Guid.NewGuid(), cats, name, gens, acts, rate, constructionYear, directorName));
             }
             catch (Exception ex)
             {

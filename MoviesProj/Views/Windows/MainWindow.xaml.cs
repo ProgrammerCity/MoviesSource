@@ -12,7 +12,9 @@ namespace MoviesProj.Views.Windows
         public MainWindow(
             MainWindowViewModel viewModel,
             IPageService pageService,
-            INavigationService navigationService
+            INavigationService navigationService, 
+            ISnackbarService snackbarService,
+            IContentDialogService contentDialogService
         )
         {
             ViewModel = viewModel;
@@ -22,7 +24,8 @@ namespace MoviesProj.Views.Windows
 
             InitializeComponent();
             SetPageService(pageService);
-
+            snackbarService.SetSnackbarPresenter(SnackbarPresenter);
+            contentDialogService.SetDialogHost(RootContentDialog);
             navigationService.SetNavigationControl(RootNavigation);
         }
 

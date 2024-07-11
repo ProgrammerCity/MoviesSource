@@ -9,11 +9,11 @@ namespace Domain.Models.Movies
     public class Movie : AuditedEntity<Guid>
     {
         #region Navigatoin
-        public List<Categury> Categuries{ get; } = [];
+        public List<MovieCategory> MovieCategory { get; } = [];
 
-        public List<Genre> Genres{ get; } = [];
+        public List<Genre> Genres { get; } = [];
 
-        public List<Actor> Actors{ get; } = [];
+        public List<Actor> Actors { get; } = [];
         #endregion
 
         #region Properties
@@ -33,6 +33,7 @@ namespace Domain.Models.Movies
             List<Categury> categuries,
             string name,
             List<Genre> genres,
+            List<Actor> actor,
             float rate,
             int constructionYear,
             string directorName)
@@ -40,7 +41,8 @@ namespace Domain.Models.Movies
             Id = id;
             SetCateguries(categuries);
             SetName(name);
-            SetGenre(genres);
+            //SetGenre(genres);
+            //SetActors(actor);
             SetRate(rate);
             SetDirectorNam(directorName);
             SetCustructionYear(constructionYear);
@@ -95,6 +97,18 @@ namespace Domain.Models.Movies
             return this;
 
         }
+        
+        public Movie SetActors(List<Actor> acts)
+        {
+            if (acts.Count == 0)
+            {
+                throw new ArgumentException("افزودن حداقل یک بازیگر الزامیست!!!");
+            }
+            Actors.Clear();
+            Actors.AddRange(acts);
+            return this;
+
+        }
 
         public Movie SetCateguries(List<Categury> categuries)
         {
@@ -122,6 +136,14 @@ namespace Domain.Models.Movies
             Name = name;
             return this;
         }
+    }
+
+    public class MovieCategory
+    {
+        public Guid MovieId { get; set; }
+        public Movie Movie { get; set; }
+        public Guid CategoryId { get; set; }
+        public Categury Category { get; set; }
     }
     #endregion
 }
