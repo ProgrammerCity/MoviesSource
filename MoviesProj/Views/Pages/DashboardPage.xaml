@@ -15,10 +15,11 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
-    <Page.Background>
-        <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill"></ImageBrush>
-    </Page.Background>
+    <Border CornerRadius="9 0 0 0">
+        <Border.Background>
+            <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill"></ImageBrush>
 
+        </Border.Background>
     <Grid>
 
         <Border CornerRadius="15"
@@ -77,93 +78,91 @@
                                              Margin="10"
                                              Grid.ColumnSpan="2"
                                              Grid.RowSpan="2">
-                    <ui:CardAction Grid.Row="0"
+                        <ui:CardAction Grid.Row="0"
                                Grid.Column="0"
                                Margin="12,12,0,0"
                                Padding="0"
-                               Width="235"
+                               Width="250"
                                VerticalAlignment="Stretch"
                                CommandParameter="BasicInput"
                                IsChevronVisible="False">
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Border Margin="5" 
-                                CornerRadius="10">
-                                <Border.Background>
-                                    <SolidColorBrush Color="Gray" Opacity="0.08"/>
-                                </Border.Background>
-                                <StackPanel VerticalAlignment="Center" 
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".8*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width=".8*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Margin="5" 
+                                        CornerRadius="10">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center" 
                                         Margin="7.5 10 7.5 0">
-                                    <ui:SymbolIcon Symbol="MoviesAndTv20" 
-                                           Width="40" 
-                                           Height="40" 
+                                        <ui:SymbolIcon Symbol="MoviesAndTv20" 
+                                           Width="35" 
+                                           Height="35" 
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           FontSize="40"/>
-                                    <TextBlock Margin="0 10 "
-                                       FontSize="13"
+                                           FontSize="30"/>
+                                        <TextBlock Margin="0 10 "
+                                       FontSize="12"
                                        Text="نام کارگردان"
                                        HorizontalAlignment="Center"
                                        FontFamily="calibri"
                                        VerticalAlignment="Center"
                                        FlowDirection="RightToLeft" />
 
-                                </StackPanel>
-                            </Border>
+                                    </StackPanel>
+                                </Border>
 
-                            <Border Margin="5" 
+                                <Border Margin="5" 
                                 Grid.Column="1"
                                 CornerRadius="10">
-                                <Border.Background>
-                                    <SolidColorBrush Color="Gray" Opacity="0.08"/>
-                                </Border.Background>
-                                <StackPanel VerticalAlignment="Center"
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center"
                                         Margin="7.5 10 7.5 0">
-                                    <Border CornerRadius="90" 
-                                        Width="40"
-                                        Height="40">
                                         <TextBlock Text="امتیاز"
-                                               FontSize="16"
-                                               HorizontalAlignment="Center"
+                                                       FontSize="16"
+                                                       Width="35"
+                                                       Height="35"
+                                                       HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
                                                FontFamily="calibri"></TextBlock>
-                                    </Border>
-                                    <ui:RatingControl Grid.Column="1"
-                                                  FontSize="12"
+                                        <ui:RatingControl Grid.Column="1"
+                                                  FontSize="14.3"
                                                   Grid.Row="2"
-                                                  Margin=" 0 0 "
+                                                  Margin="0 0 "
                                                   IsEnabled="False"
                                                   FlowDirection="LeftToRight"
                                                   HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                                    </StackPanel>
+                                </Border>
 
-                            <Border Margin="5" 
+                                <Border Margin="5" 
                                 Grid.Column="2"
                                 CornerRadius="10">
-                                <Border.Background>
-                                    <SolidColorBrush Color="Gray" Opacity="0.08"/>
-                                </Border.Background>
-                                <StackPanel VerticalAlignment="Center"
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center"
                                         Margin="7.5 10 7.5 0">
-                                    <ui:SymbolIcon Symbol="CalendarRtl16" 
-                                           Width="40" 
-                                           Height="40" 
+                                        <ui:SymbolIcon Symbol="CalendarRtl16" 
+                                           Width="35" 
+                                           Height="35" 
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           FontSize="40"/>
+                                           FontSize="30"/>
 
-                                    <TextBlock Margin="0 10"
-                                                   FontSize="13"
+                                        <TextBlock Margin="0 10"
+                                                   FontSize="12"
                                                    Text="سال ساخت"
                                                    TextWrapping="WrapWithOverflow"
                                                    HorizontalAlignment="Center"
@@ -171,35 +170,36 @@
                                                    VerticalAlignment="Center"
                                                    FlowDirection="RightToLeft"/>
 
-                                </StackPanel>
-                            </Border>
+                                    </StackPanel>
+                                </Border>
 
-                            <Border Margin="5 4 5 5" Grid.Row="1" Grid.ColumnSpan="3" Width="225" Height="152" CornerRadius="9">
-                                <Border.Background>
-                                    <SolidColorBrush Color="Gray" Opacity="0.08"/>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
+                                <Border Margin="5 4 5 5" Grid.Row="1" Grid.ColumnSpan="3" Height="152" CornerRadius="9">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="Gray" Opacity="0.08"/>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
 
-                                    <Border CornerRadius="15" Margin="8 8 8 4">
-                                        <Border.Background >
-                                            <ImageBrush ImageSource="/Assets/Background.png"/>
-                                        </Border.Background>
-                                    </Border>
-                                    <TextBlock Grid.Row="1" 
+                                        <Border CornerRadius="15" Margin="8 8 8 4">
+                                            <Border.Background >
+                                                <ImageBrush ImageSource="/Assets/Background.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Grid.Row="1" 
                                            HorizontalAlignment="Center"
                                            FontFamily="calibri" 
                                            Margin="0 0 0 12"
                                            Text="عنوان فیلم"/>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ui:CardAction>
-                </ui:VirtualizingItemsControl>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ui:CardAction>
+                    </ui:VirtualizingItemsControl>
             </Grid>
         </Border>
     </Grid>
+    </Border>
 </Page>

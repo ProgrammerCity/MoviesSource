@@ -15,12 +15,12 @@
       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       Title="MoviesPage">
 
+    <Border CornerRadius="9 0 0 0">
+        <Border.Background>
+            <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill"></ImageBrush>
 
-    <Page.Background>
-        <ImageBrush ImageSource="/Assets/Background1.png"
-                    Stretch="UniformToFill"></ImageBrush>
-    </Page.Background>
-    <Grid>
+        </Border.Background>
+        <Grid>
 
         <Border Opacity=".8"
                 CornerRadius="15"
@@ -79,7 +79,7 @@
                 <Grid Grid.Column="1"
                       Grid.RowSpan="2"
                       Grid.ColumnSpan="4"
-                      Margin="0 15 0 0"
+                      Margin="0 7 0 0"
                       FlowDirection="RightToLeft">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -138,12 +138,12 @@
                     </StackPanel>
                     <ui:RatingControl Grid.Column="1"
                                       Grid.Row="2"
-                                      Margin="0 8 0 10 "
+                                      Margin="0 8 0 0 "
                                       FlowDirection="LeftToRight"
                                       HorizontalAlignment="Center" />
 
                     <Grid Grid.Row="3"
-                          Margin="0 4 0 10"
+                          Margin="0 0 0 10"
                           Grid.ColumnSpan="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
@@ -154,7 +154,17 @@
                                    FontSize="15"
                                    Text="ژانر"
                                    Margin="2 0 0 10 " />
-                        <ui:ListView Grid.Row="1"
+
+
+
+                        <Border
+                            Grid.Row="1"
+                            Padding="16"
+                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1,1,1,0"
+                            CornerRadius="8,8,8,8">
+                            <ui:ListView Grid.Row="1"
                                      MaxHeight="300"
                                      x:Name="lst_Gen"
                                      d:ItemsSource="{d:SampleData ItemCount=3}"
@@ -168,6 +178,7 @@
                                 </DataTemplate>
                             </ui:ListView.ItemTemplate>
                         </ui:ListView>
+                        </Border>
                     </Grid>
                     <Grid Grid.Row="4"
                           Margin="0 4 0 10"
@@ -182,6 +193,13 @@
                                    Text="بازیگران"
                                    Margin="2 0 0 10 " />
 
+                        <Border
+                            Grid.Row="1"
+                            Padding="16"
+                            Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1,1,1,0"
+                            CornerRadius="8,8,8,8">
                         <ui:ListView Grid.Row="1"
                                      MaxHeight="210"
                                      ItemsSource="{Binding ViewModel.ActorList, Mode=TwoWay}"
@@ -222,6 +240,7 @@
                                 </DataTemplate>
                             </ui:ListView.ItemTemplate>
                         </ui:ListView>
+                        </Border>
                     </Grid>
 
                     <Button Grid.Row="7"
@@ -247,5 +266,5 @@
             </Grid>
         </Border>
     </Grid>
-
+    </Border>
 </Page>

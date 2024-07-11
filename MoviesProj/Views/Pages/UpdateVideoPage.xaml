@@ -12,11 +12,12 @@
       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UpdateVideoPage">
-    <Page.Background>
-        <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill"></ImageBrush>
-    </Page.Background>
 
+    <Border CornerRadius="9 0 0 0">
+        <Border.Background>
+            <ImageBrush ImageSource="/Assets/Background1.png" Stretch="UniformToFill"></ImageBrush>
 
+        </Border.Background>
 
     <Grid>
         <Border  CornerRadius="15" Margin="40">
@@ -143,13 +144,18 @@
                         </Grid.RowDefinitions>
 
 
+                        <TextBlock Grid.Row="0"
+                                   FontFamily="Calibri"
+                                   FontSize="15"
+                                   Text="ژانر"
+                                   Margin="2 0 0 10 " />
                         <Border
                             Grid.Row="1"
                             Padding="16"
                             Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1,1,1,0"
-                            CornerRadius="8,8,0,0">
+                            CornerRadius="8,8,8,8">
                             <ui:ListView
                             MaxHeight="200"
                             d:ItemsSource="{d:SampleData ItemCount=3}"
@@ -184,10 +190,9 @@
                             Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                             BorderThickness="1,1,1,0"
-                            CornerRadius="8,8,0,0">
+                            CornerRadius="8,8,8,8">
 
                             <ui:ListView Grid.Column="1"
-                                     MaxHeight="200"
                                      d:ItemsSource="{d:SampleData ItemCount=2}"
                                      ItemsSource="{Binding ViewModel.GenreList, Mode=TwoWay}"
                                      SelectedIndex="1"
@@ -231,7 +236,7 @@
                         </Border>
                     </Grid>
 
-                    <Button Grid.Row="7"
+                    <Button Grid.Row="5"
                             Grid.Column="1"
                                 Margin="5"
                                 FontSize="16"
@@ -255,4 +260,5 @@
         </Border>
 
     </Grid>
+    </Border>
 </Page>
