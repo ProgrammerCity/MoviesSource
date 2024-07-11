@@ -1,4 +1,5 @@
-﻿using Domain.Models.Catequries;
+﻿using Domain.Entities.Actors;
+using Domain.Models.Catequries;
 using Domain.Models.Genres;
 using Domain.Models.Movies;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,16 @@ namespace EntityCore.Data
                r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
                j => j.HasKey("CateguryId", "MvoieId"));
             #endregion
+            
+            #region ManyToManyMovieActors
+            builder.Entity<Movie>()
+              .HasMany(e => e.Actors)
+              .WithMany(e => e.Movies)
+              .UsingEntity("MovieActor",
+               l => l.HasOne(typeof(Actor)).WithMany().HasForeignKey("ActorId").HasPrincipalKey(nameof(Actor.Id)),
+               r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
+               j => j.HasKey("ActorId", "MvoieId"));
+            #endregion
 
 
             builder.Entity<Categury>(b =>
@@ -53,6 +64,13 @@ namespace EntityCore.Data
             {
                 b.HasIndex(t => t.Id);
                 b.Property(t => t.Titele).IsRequired();
+            });
+            
+            builder.Entity<Actor>(b =>
+            {
+                b.HasIndex(t => t.Id);
+                b.Property(t => t.Name).IsRequired();
+                b.Property(t => t.Nickname).IsRequired();
             });
         }
 

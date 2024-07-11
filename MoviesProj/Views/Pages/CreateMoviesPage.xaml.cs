@@ -19,7 +19,7 @@ namespace MoviesProj.Views.Pages
 
         private void Btn_submit_Click(object sender, RoutedEventArgs e)
         {
-            //var s = lst_Gen.SelectedItems;
+            var s = lst_Gen.SelectedItems;
         }
     }
 }

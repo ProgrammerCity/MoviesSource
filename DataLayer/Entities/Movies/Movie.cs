@@ -1,4 +1,5 @@
 ﻿using Domain.Abstractions;
+using Domain.Entities.Actors;
 using Domain.Models.Catequries;
 using Domain.Models.Genres;
 using DomainShared.Error;
@@ -11,6 +12,8 @@ namespace Domain.Models.Movies
         public List<Categury> Categuries{ get; } = [];
 
         public List<Genre> Genres{ get; } = [];
+
+        public List<Actor> Actors{ get; } = [];
         #endregion
 
         #region Properties
