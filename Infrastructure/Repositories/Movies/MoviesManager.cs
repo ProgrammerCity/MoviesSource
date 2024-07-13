@@ -26,6 +26,7 @@ namespace EntityFreamewoerkCore.Movies
                            movie.Genres.Select(c => c.Id).ToList(),
                            movie.Actors.Select(c => c.Id).ToList(),
                            movie.Name,
+                           movie.BannerPath,
                            movie.DirectorName,
                            movie.Rate,
                            movie.ConstructionYear);
@@ -44,6 +45,7 @@ namespace EntityFreamewoerkCore.Movies
                           .Where(t => genreId == null || t.Genres.Any(t => t.Id == genreId))
                           .Select(t => new MoviListViewModel(t.Id,
                               t.Name,
+                              t.BannerPath,
                               t.DirectorName,
                               string.Join(" , ", t.Genres.Select(g => g.Titele).ToList()),
                               t.Rate,
@@ -58,6 +60,7 @@ namespace EntityFreamewoerkCore.Movies
 
 
         public async Task<(string error, bool isSuccess)> Create(string name,
+                    string bannerPath,
                     float rate,
                     List<Guid> categuries,
                     List<Guid> genres,
@@ -71,7 +74,7 @@ namespace EntityFreamewoerkCore.Movies
 
             try
             {
-                await Entities.AddAsync(new Movie(Guid.NewGuid(), cats, name, gens, acts, rate, constructionYear, directorName));
+                await Entities.AddAsync(new Movie(Guid.NewGuid(), cats, name, bannerPath, gens, acts, rate, constructionYear, directorName));
             }
             catch (Exception ex)
             {
@@ -86,6 +89,7 @@ namespace EntityFreamewoerkCore.Movies
 
         public async Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
             string name,
+            string bannerPath,
             float rate,
             List<Guid> categuries,
             List<Guid> genres,
@@ -102,6 +106,7 @@ namespace EntityFreamewoerkCore.Movies
             try
             {
                 movie.SetName(name);
+                movie.SetBanner(bannerPath);
                 movie.SetGenre(gens);
                 movie.SetCateguries(cats);
                 movie.SetRate(rate);

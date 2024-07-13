@@ -185,7 +185,7 @@
 
                                         <Border CornerRadius="15" Margin="8 8 8 4">
                                             <Border.Background >
-                                                <ImageBrush ImageSource="/Assets/Background.png"/>
+                                                <ImageBrush ImageSource="/Assets/Images/MovieBanner.png"/>
                                             </Border.Background>
                                         </Border>
                                         <TextBlock Grid.Row="1" 

@@ -121,7 +121,11 @@
                                 Padding="17 4 17 4"
                                 HorizontalAlignment="Left"
                                 Command="{Binding ViewModel.SubmitCommand}"
-                                IsDefault="True">جستجو</Button>
+                                IsDefault="True">
+                            <TextBlock FontFamily="calibri"
+                                       Padding="2"
+                                       FontSize="16">جستجو</TextBlock>
+                        </Button>
                     </Grid>
                     <DataGrid Grid.Row="1"
                               Padding="7"

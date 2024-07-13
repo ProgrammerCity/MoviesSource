@@ -123,6 +123,7 @@ namespace MoviesProj.ViewModels.Pages
                 MovieId = movie.Id,
                 Name = movie.Name,
                 Rate = movie.Rate,
+                FilePath = movie.bannerPath,
                 ActorList = actorList,
                 CateguryList = categuryList,
                 GenreList = genreList,

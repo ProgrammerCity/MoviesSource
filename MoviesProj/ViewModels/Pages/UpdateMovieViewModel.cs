@@ -31,16 +31,19 @@ namespace MoviesProj.ViewModels.Pages
         private Guid _movieId;
 
         [ObservableProperty]
-        private List<Guid> _genresId;
+        private List<Guid> _genresId = [];
 
         [ObservableProperty]
-        private List<Guid> _catequriesId;
+        private List<Guid> _catequriesId = [];
 
         [ObservableProperty]
-        private List<Guid> _actorsId;
+        private List<Guid> _actorsId = [];
 
         [ObservableProperty]
         private string _name = default!;
+
+        [ObservableProperty]
+        private string _filePath = default!;
 
         [ObservableProperty]
         private string _directorName = default!;
@@ -63,6 +66,13 @@ namespace MoviesProj.ViewModels.Pages
                 _snackbarService.Show("کاربر گرامی", "وارد کردن سال ساخت الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
                 return;
             }
+
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                _snackbarService.Show("کاربر گرامی", "انتخاب بنر فیلم الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
             //var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId, Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
             //if (!isSuccess)
             //{

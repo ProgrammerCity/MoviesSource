@@ -17,6 +17,7 @@ namespace Domain.Movies
             int pageCount);
 
         Task<(string error, bool isSuccess)> Create(string name,
+            string bannerPath,
              float rate,
              List<Guid> categuries,
              List<Guid> genres,
@@ -26,6 +27,7 @@ namespace Domain.Movies
 
         Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
              string name,
+             string bannerPath,
              float rate,
              List<Guid> categuries,
              List<Guid> genres,

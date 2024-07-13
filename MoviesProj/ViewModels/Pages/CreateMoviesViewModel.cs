@@ -40,6 +40,9 @@ namespace MoviesProj.ViewModels.Pages
         private string _name = default!;
 
         [ObservableProperty]
+        private string _filePath = default!;
+
+        [ObservableProperty]
         private string _directorName = default!;
 
         [ObservableProperty]
@@ -73,13 +76,20 @@ namespace MoviesProj.ViewModels.Pages
                 _snackbarService.Show("کاربر گرامی", "وارد کردن سال ساخت الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
                 return;
             }
-            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequriesId, GenresId,ActorsId, ConstructionYear.Value, DirectorName);
+
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                _snackbarService.Show("کاربر گرامی", "انتخاب بنر فیلم الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
+            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, FilePath, Rate, CatequriesId, GenresId, ActorsId, ConstructionYear.Value, DirectorName);
             if (!isSuccess)
             {
                 _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
                 return;
             }
-           await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
             _snackbarService.Show("کاربر گرامی", "عملیات با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
 
             _navigationService.Navigate(typeof(MoviesListPage));

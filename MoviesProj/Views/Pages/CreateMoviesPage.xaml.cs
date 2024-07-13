@@ -2,6 +2,9 @@
 using DomainShared.ViewModels.Categuries;
 using DomainShared.ViewModels.Genres;
 using MoviesProj.ViewModels.Pages;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 using Wpf.Ui.Controls;
 
 namespace MoviesProj.Views.Pages
@@ -39,6 +42,31 @@ namespace MoviesProj.Views.Pages
 
             }
             await ViewModel.SumbitCommand.ExecuteAsync(null);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fd = new()
+            {
+                Title = "Select image",
+                InitialDirectory = "",
+                Filter = "Image Files (*.gif,*.jpg,*.jpeg,*.bmp,*.png)|*.gif;*.jpg;*.jpeg;*.bmp;*.png"
+            };
+
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string curFile = Path.GetFileName(fd.FileName);
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var imagePath = path + @"\Assets\Images";
+                if (!Directory.Exists(imagePath))
+                {
+                    _ = Directory.CreateDirectory(imagePath);
+                }
+
+                string newPathToFile = Path.Combine(imagePath, curFile);
+                File.Copy(fd.FileName, newPathToFile);
+                ViewModel.FilePath = Path.Combine(@"\Assets\Images", curFile);
+            }
         }
     }
 }

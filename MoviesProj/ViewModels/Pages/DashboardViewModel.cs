@@ -63,17 +63,5 @@ namespace MoviesProj.ViewModels.Pages
             //PageCount = t.PageCount;
             //_isInit = false;
         }
-
-        [RelayCommand]
-        private async Task OnChangePage()
-        {
-            if (_isInit)
-            {
-                return;
-            }
-            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, PageCount);
-            List = t.Items;
-            PageCount = t.PageCount;
-        }
     }
 }

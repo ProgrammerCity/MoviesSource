@@ -18,6 +18,7 @@ namespace Domain.Models.Movies
 
         #region Properties
         public string Name { get; private set; } = default!;
+        public string BannerPath { get; private set; } = default!;
         public string DirectorName { get; private set; } = default!;
         public int ConstructionYear { get; private set; } = default!;
         public float Rate { get; private set; } = default!;
@@ -32,6 +33,7 @@ namespace Domain.Models.Movies
         public Movie(Guid id,
             List<Categury> categuries,
             string name,
+            string bannerPath,
             List<Genre> genres,
             List<Actor> actor,
             float rate,
@@ -41,6 +43,7 @@ namespace Domain.Models.Movies
             Id = id;
             SetCateguries(categuries);
             SetName(name);
+            SetBanner(bannerPath);
             SetGenre(genres);
             SetActors(actor);
             SetRate(rate);
@@ -131,6 +134,21 @@ namespace Domain.Models.Movies
                 throw new ArgumentException(CoreError.IsLess("نام فیلم", "پنجاه"));
             }
             Name = name;
+            return this;
+        }
+        
+        public Movie SetBanner(string bannerPath)
+        {
+            if (string.IsNullOrEmpty(bannerPath))
+            {
+                throw new ArgumentException(CoreError.IsMandatory("بنر فیلم"));
+            }
+
+            if (bannerPath.Length > 50)
+            {
+                throw new ArgumentException(CoreError.IsLess("بنر فیلم", "پنجاه"));
+            }
+            BannerPath = bannerPath;
             return this;
         }
     }

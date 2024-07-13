@@ -12,6 +12,7 @@
       xmlns:actModels="clr-namespace:DomainShared.ViewModels.Actors;assembly=DomainShared"
       mc:Ignorable="d"
       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Loaded="Page_Loaded"
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="UpdateMoviePage">
@@ -50,6 +51,8 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+
+                    <!--#region pins -->
                     <ui:SymbolIcon Symbol="Circle16"
                                    Filled="True"
                                    HorizontalAlignment="Left"
@@ -78,10 +81,13 @@
                                    VerticalAlignment="Bottom"
                                    FontSize="6"
                                    Foreground="#FF949494" />
+                    <!--#endregion-->
+
+                    <!--#region MainGrid -->
                     <Grid Grid.Column="1"
                           Grid.RowSpan="2"
                           Grid.ColumnSpan="4"
-                          Margin="0 15 0 0"
+                          Margin="0 7 0 0"
                           FlowDirection="RightToLeft">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -90,26 +96,46 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height=".5*" />
+                            <RowDefinition  Height="auto" />
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.ColumnSpan="3"
-                                    VerticalAlignment="Bottom"
-                                    Margin="0 0 0 10">
-                            <TextBlock FontFamily="Calibri"
-                                       FontSize="15"
-                                       Text="عنوان فیلم"
-                                       Margin="4 0 0 0 " />
-                            <ui:TextBox TextAlignment="Center"
-                                        FontSize="15"
-                                        Text="{Binding ViewModel.Name, Mode=TwoWay}"
-                                        Margin="0 4 0 0 "
-                                        FontFamily="Calibri" />
-                        </StackPanel>
+                        <!--#region MovieTitele -->
+                        <Grid Grid.Row="0"
+                              Grid.ColumnSpan="3"
+                              VerticalAlignment="Bottom"
+                              Margin="0 0 0 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width=".3*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock FontFamily="Calibri"
+                                           FontSize="15"
+                                           Text="عنوان فیلم"
+                                           Margin="4 0 0 0 " />
+                                <ui:TextBox TextAlignment="Center"
+                                            FontSize="15"
+                                            Text="{Binding ViewModel.Name, Mode=TwoWay}"
+                                            Margin="0 4 0 0 "
+                                            FontFamily="Calibri" />
+                            </StackPanel>
+
+                            <ui:Button HorizontalAlignment="Center"
+                                       Grid.Column="1"
+                                       Click="Button_Click"
+                                       Margin=" 0 23 0 0">
+                                <TextBlock FontFamily="calibri"
+                                           Padding="1"
+                                           FontSize="16">انتخاب بنر فیلم</TextBlock>
+                            </ui:Button>
+                        </Grid>
+                        <!--#endregion-->
 
                         <StackPanel Grid.Row="1"
                                     Margin="0 10 10 10">
@@ -117,7 +143,7 @@
                                         FontSize="15"
                                         PlaceholderText="سال ساخت"
                                         Margin="0 4 0 0 "
-                                        Text="{Binding ViewModel.ConstructionYear, Mode=TwoWay}"
+                                        Text="{Binding ViewModel.ConstructionYear,Mode=TwoWay }"
                                         FontFamily="Calibri" />
                         </StackPanel>
                         <StackPanel  Grid.Row="1"
@@ -130,36 +156,34 @@
                                         Margin="0 4 0 0 "
                                         FontFamily="Calibri" />
                         </StackPanel>
-
                         <StackPanel Grid.Row="1"
                                     Grid.Column="2"
                                     Margin="10 10 0 10">
                             <ui:TextBox TextAlignment="Center"
                                         FontSize="15"
                                         PlaceholderText="کارگردان"
-                                        Text="{Binding ViewModel.DirectorName, Mode=TwoWay}"
                                         Margin="0 4 0 0 "
+                                        Text="{Binding ViewModel.DirectorName, Mode=TwoWay}"
                                         FontFamily="Calibri" />
                         </StackPanel>
-                        <ui:RatingControl Grid.Column="1"
-                                          Grid.Row="2"
-                                          Value="{Binding ViewModel.Rate, Mode=TwoWay}"
-                                          Margin="0 8 0 10 "
+                        <ui:RatingControl Grid.Row="2"
+                                          Grid.Column="1"
+                                          Value="{Binding ViewModel.Rate , Mode=TwoWay}"
+                                          Margin="0 8 0 0 "
                                           FlowDirection="LeftToRight"
                                           HorizontalAlignment="Center" />
 
+                        <!--#region genre -->
                         <Grid Grid.Row="3"
-                              Margin="0 4 0 10"
+                              Margin="0 0 0 10"
                               Grid.ColumnSpan="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-
-
                             <TextBlock Grid.Row="0"
                                        FontFamily="Calibri"
-                                       FontSize="15"
+                                       FontSize="20"
                                        Text="ژانر"
                                        Margin="2 0 0 10 " />
                             <Border Grid.Row="1"
@@ -168,10 +192,10 @@
                                     BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
-                                
-                                <ui:ListView MaxHeight="200"
+                                <ui:ListView Grid.Row="1"
+                                             MaxHeight="115"
+                                             x:Name="lst_gen"
                                              ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
-                                             SelectedValue="{Binding ViewModel.GenreList, Mode=TwoWay}"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type models:GenresListViewModel}">
@@ -182,7 +206,46 @@
                                 </ui:ListView>
                             </Border>
                         </Grid>
+                        <!--#endregion-->
+
+                        <!--#region categury -->
                         <Grid Grid.Row="4"
+                              Margin="0 0 0 10"
+                              Grid.ColumnSpan="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       FontFamily="Calibri"
+                                       FontSize="20"
+                                       Text="دسته"
+                                       Margin="2 0 0 10 " />
+
+                            <Border Grid.Row="1"
+                                    Padding="16"
+                                    Background="{ui:ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1,1,1,0"
+                                    CornerRadius="8,8,8,8">
+                                <ui:ListView Grid.Row="1"
+                                             MaxHeight="115"
+                                             x:Name="lst_cat"
+                                             ItemsSource="{Binding ViewModel.CateguryList, Mode=OneWay}"
+                                             SelectionMode="Multiple">
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type catModels:CateguryListViewModel}">
+                                            <TextBlock Margin="8,4"
+                                                       Text="{Binding Name, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+                            </Border>
+                        </Grid>
+                        <!--#endregion-->
+
+                        <!--#region Actors -->
+                        <Grid Grid.Row="5"
                               Margin="0 4 0 10"
                               Grid.ColumnSpan="3">
                             <Grid.RowDefinitions>
@@ -191,10 +254,9 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
                                        FontFamily="Calibri"
-                                       FontSize="15"
+                                       FontSize="20"
                                        Text="بازیگران"
-                                       Margin="2 0 0 4 " />
-
+                                       Margin="2 0 0 10 " />
 
                             <Border Grid.Row="1"
                                     Padding="16"
@@ -202,10 +264,10 @@
                                     BorderBrush="{ui:ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1,1,1,0"
                                     CornerRadius="8,8,8,8">
-
-                                <ui:ListView Grid.Column="1"
-                                             d:ItemsSource="{d:SampleData ItemCount=2}"
-                                             ItemsSource="{Binding ViewModel.ActorList}"
+                                <ui:ListView Grid.Row="1"
+                                             MaxHeight="240"
+                                             x:Name="lst_act"
+                                             ItemsSource="{Binding ViewModel.ActorList, Mode=TwoWay}"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type actModels:ActorsListViewModel}">
@@ -237,7 +299,6 @@
                                                 <TextBlock Grid.Row="1"
                                                            Grid.Column="1"
                                                            Margin="12,0,0,6"
-                                                           Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                                                            Text="{Binding NickName, Mode=OneWay}" />
                                             </Grid>
                                         </DataTemplate>
@@ -245,26 +306,24 @@
                                 </ui:ListView>
                             </Border>
                         </Grid>
+                        <!--#endregion-->
 
-                        <Button Grid.Row="5"
+                        <Button Grid.Row="6"
                                 Grid.Column="1"
                                 Margin="5"
                                 FontSize="16"
                                 Padding="30 4"
                                 x:Name="Btn_submit"
                                 FontFamily="Calibri"
+                                Click="Btn_submit_Click"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="ثبت" />
-                                <TextBlock Text=" (F1)"
-                                           FontSize="12"
-                                           VerticalAlignment="Center"
-                                           Foreground="#FFA3A3A3" />
-                            </StackPanel>
+                            افزودن
                         </Button>
 
+
                     </Grid>
+                    <!--#endregion-->
                 </Grid>
             </Border>
 
