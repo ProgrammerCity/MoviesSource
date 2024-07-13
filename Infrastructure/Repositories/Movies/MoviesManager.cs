@@ -33,26 +33,19 @@ namespace EntityFreamewoerkCore.Movies
         }
 
         public async Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
-            float? rate,
-            Guid? catequryId,
             Guid? genreId,
             int? constructionYear,
-            string directorName,
             int pageNum,
             int pageCount)
-
         {
             var q = TableNoTracking
                           .Where(t => string.IsNullOrEmpty(name) || t.Name.Contains(name))
-                          .Where(t => string.IsNullOrEmpty(directorName) || t.DirectorName.Contains(directorName))
-                          //.Where(t => genreId == null || t.Genres.Contains(genreId.Value))
-                          //.Where(t => catequryId == null || t.CateguryId == catequryId)
                           .Where(t => constructionYear == null || t.ConstructionYear == constructionYear)
-                          .Where(t => rate == null || t.Rate == rate)
+                          .Where(t => genreId == null || t.Genres.Any(t => t.Id == genreId))
                           .Select(t => new MoviListViewModel(t.Id,
                               t.Name,
                               t.DirectorName,
-                              string.Join(',', t.Genres.Select(g => g.Titele).ToList()),
+                              string.Join(" , ", t.Genres.Select(g => g.Titele).ToList()),
                               t.Rate,
                               t.ConstructionYear)).AsQueryable();
 

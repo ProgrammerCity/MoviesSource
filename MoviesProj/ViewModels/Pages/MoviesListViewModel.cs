@@ -29,7 +29,7 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private int _pageCount = 20;
+        private int _pageCount;
 
         [ObservableProperty]
         private int _currentPage = 1;
@@ -38,19 +38,13 @@ namespace MoviesProj.ViewModels.Pages
         private int? _constructionYear;
 
         [ObservableProperty]
-        private byte? _rate;
-
-        [ObservableProperty]
         private Guid? _genreId;
-
-        [ObservableProperty]
-        private Guid? _catequryId;
 
         [ObservableProperty]
         private string _name = default!;
 
         [ObservableProperty]
-        private string _directorName = default!;
+        private List<GenresListViewModel> _genreList = [];
 
         [ObservableProperty]
         private IEnumerable<MoviListViewModel> _list = default!;
@@ -68,7 +62,8 @@ namespace MoviesProj.ViewModels.Pages
         private async Task InitializeViewModel()
         {
             _isInit = true;
-            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
+            GenreList = await _unitOfWork.GenresRepository.GetGenresList();
+            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, 20);
             CurrentPage = t.CurrentPage;
             List = t.Items;
             PageCount = t.PageCount;
@@ -82,9 +77,20 @@ namespace MoviesProj.ViewModels.Pages
             {
                 return;
             }
-            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
+            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, 20);
             List = t.Items;
             PageCount = t.PageCount;
+        }
+
+        [RelayCommand]
+        private async Task OnSubmit()
+        {
+            _isInit = true;
+            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, 20);
+            List = t.Items;
+            CurrentPage = t.CurrentPage;
+            PageCount = t.PageCount;
+            _isInit = false;
         }
 
         [RelayCommand]
@@ -148,7 +154,7 @@ namespace MoviesProj.ViewModels.Pages
 
                 await _unitOfWork.SaveChangesAsync();
                 _snackbarService.Show("کاربر گرامی", "حذف با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
-                var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
+                var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, 20);
                 List = t.Items;
                 PageCount = t.PageCount;
             }

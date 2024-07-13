@@ -49,7 +49,7 @@ namespace MoviesProj.ViewModels.Pages
             await InitializeViewModel();
         }
 
-        public void OnNavigatedFrom() 
+        public void OnNavigatedFrom()
         {
         }
 
@@ -57,7 +57,7 @@ namespace MoviesProj.ViewModels.Pages
         private async Task InitializeViewModel()
         {
             _isInit = true;
-            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
+            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, PageCount);
             //CurrentPage = t.CurrentPage;
             //List = t.Items;
             //PageCount = t.PageCount;
@@ -71,7 +71,7 @@ namespace MoviesProj.ViewModels.Pages
             {
                 return;
             }
-            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName, CurrentPage, PageCount);
+            var t = await _unitOfWork.MoviesRepository.GetMoviesList(Name, GenreId, ConstructionYear, CurrentPage, PageCount);
             List = t.Items;
             PageCount = t.PageCount;
         }

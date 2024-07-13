@@ -175,7 +175,6 @@
                                              MaxHeight="115"
                                              x:Name="lst_gen"
                                              ItemsSource="{Binding ViewModel.GenreList, Mode=OneWay}"
-                                             SelectedIndex="2"
                                              SelectionMode="Multiple">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate DataType="{x:Type models:GenresListViewModel}">

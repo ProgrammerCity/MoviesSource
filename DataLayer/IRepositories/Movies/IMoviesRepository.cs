@@ -11,11 +11,8 @@ namespace Domain.Movies
         Task<MoviDetailsViewModel> GetMovieById(Guid id);
 
         Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
-            float? rate,
-            Guid? categuryId,
-            Guid? gereId,
+            Guid? genreId,
             int? constructionYear,
-            string directorName,
             int pageNum,
             int pageCount);
 
