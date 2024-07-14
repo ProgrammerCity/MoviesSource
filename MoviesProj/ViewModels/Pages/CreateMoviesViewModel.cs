@@ -2,6 +2,7 @@
 using DomainShared.ViewModels.Actors;
 using DomainShared.ViewModels.Categuries;
 using DomainShared.ViewModels.Genres;
+using MoviesProj.Views.Pages;
 using System.Collections.ObjectModel;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
@@ -21,7 +22,7 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private int _constructionYear = 2000;
+        private int? _constructionYear;
 
         [ObservableProperty]
         private float _rate = 0;
@@ -37,6 +38,9 @@ namespace MoviesProj.ViewModels.Pages
 
         [ObservableProperty]
         private string _name = default!;
+
+        [ObservableProperty]
+        private string _filePath = default!;
 
         [ObservableProperty]
         private string _directorName = default!;
@@ -67,15 +71,28 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task OnSumbit(Type pageType)
         {
-            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, Rate, CatequriesId, GenresId, ConstructionYear, DirectorName);
+            if (ConstructionYear == null)
+            {
+                _snackbarService.Show("کاربر گرامی", "وارد کردن سال ساخت الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                _snackbarService.Show("کاربر گرامی", "انتخاب بنر فیلم الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
+            var (error, isSuccess) = await _unitOfWork.MoviesRepository.Create(Name, FilePath, Rate, CatequriesId, GenresId, ActorsId, ConstructionYear.Value, DirectorName);
             if (!isSuccess)
             {
                 _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
                 return;
             }
+            await _unitOfWork.SaveChangesAsync();
             _snackbarService.Show("کاربر گرامی", "عملیات با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
 
-            _navigationService.Navigate(pageType);
+            _navigationService.Navigate(typeof(MoviesListPage));
         }
     }
 }

@@ -5,6 +5,7 @@ using Domain.Models.Movies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace EntityCore.Data
 {
@@ -34,6 +35,7 @@ namespace EntityCore.Data
             #endregion
 
             #region ManyToManyMovieCategury
+
             builder.Entity<Movie>()
               .HasMany(e => e.Categuries)
               .WithMany(e => e.Movies)
@@ -42,7 +44,7 @@ namespace EntityCore.Data
                r => r.HasOne(typeof(Movie)).WithMany().HasForeignKey("MvoieId").HasPrincipalKey(nameof(Movie.Id)),
                j => j.HasKey("CateguryId", "MvoieId"));
             #endregion
-            
+
             #region ManyToManyMovieActors
             builder.Entity<Movie>()
               .HasMany(e => e.Actors)

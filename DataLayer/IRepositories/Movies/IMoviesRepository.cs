@@ -11,29 +11,32 @@ namespace Domain.Movies
         Task<MoviDetailsViewModel> GetMovieById(Guid id);
 
         Task<PagedResulViewModel<MoviListViewModel>> GetMoviesList(string name,
-            float? rate,
-            Guid? categuryId,
-            Guid? gereId,
+            Guid? genreId,
             int? constructionYear,
-            string directorName,
             int pageNum,
             int pageCount);
 
+        Task<List<MoviListViewModel>> GetDashboardMovies();
+
         Task<(string error, bool isSuccess)> Create(string name,
+            string bannerPath,
              float rate,
              List<Guid> categuries,
              List<Guid> genres,
+             List<Guid> actor,
              int constructionYear,
              string directorName);
 
         Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
-             string name,
-             float rate,
-             List<Guid> categuries,
-             List<Guid> genres,
-             int constructionYear,
-             string directorName);
-        
+            string name,
+            string bannerPath,
+            float rate,
+            List<Guid> categuries,
+            List<Guid> genres,
+            List<Guid> actors,
+            int constructionYear,
+            string directorName);
+
         Task<(string error, bool isSuccess)> DeleteMovie(Guid movieId);
     }
 }

@@ -4,6 +4,7 @@ using EntityCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MainApplicationDbContext))]
-    partial class MainApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240711192603_addManyToMany")]
+    partial class addManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,10 +157,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWSEQUENTIALID()");
 
-                    b.Property<string>("BannerPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ConstructionYear")
                         .HasColumnType("int");
 
@@ -202,6 +201,21 @@ namespace Infrastructure.Migrations
                     b.ToTable("Movie");
                 });
 
+            modelBuilder.Entity("Domain.Models.Movies.MovieCategory", b =>
+                {
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MovieId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("MovieCategories");
+                });
+
             modelBuilder.Entity("MovieActor", b =>
                 {
                     b.Property<Guid>("ActorId")
@@ -215,21 +229,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("MvoieId");
 
                     b.ToTable("MovieActor");
-                });
-
-            modelBuilder.Entity("MovieCategury", b =>
-                {
-                    b.Property<Guid>("CateguryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MvoieId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CateguryId", "MvoieId");
-
-                    b.HasIndex("MvoieId");
-
-                    b.ToTable("MovieCategury");
                 });
 
             modelBuilder.Entity("MovieGenre", b =>
@@ -247,26 +246,30 @@ namespace Infrastructure.Migrations
                     b.ToTable("MovieGenre");
                 });
 
+            modelBuilder.Entity("Domain.Models.Movies.MovieCategory", b =>
+                {
+                    b.HasOne("Domain.Models.Catequries.Categury", "Category")
+                        .WithMany("MovieCategoreis")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.Movies.Movie", "Movie")
+                        .WithMany("MovieCategoreis")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieActor", b =>
                 {
                     b.HasOne("Domain.Entities.Actors.Actor", null)
                         .WithMany()
                         .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Models.Movies.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MvoieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MovieCategury", b =>
-                {
-                    b.HasOne("Domain.Models.Catequries.Categury", null)
-                        .WithMany()
-                        .HasForeignKey("CateguryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -290,6 +293,16 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("MvoieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Models.Catequries.Categury", b =>
+                {
+                    b.Navigation("MovieCategoreis");
+                });
+
+            modelBuilder.Entity("Domain.Models.Movies.Movie", b =>
+                {
+                    b.Navigation("MovieCategoreis");
                 });
 #pragma warning restore 612, 618
         }

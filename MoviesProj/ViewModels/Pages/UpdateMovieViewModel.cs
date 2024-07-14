@@ -22,7 +22,7 @@ namespace MoviesProj.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private int _constructionYear;
+        private int? _constructionYear;
 
         [ObservableProperty]
         private float _rate;
@@ -31,16 +31,19 @@ namespace MoviesProj.ViewModels.Pages
         private Guid _movieId;
 
         [ObservableProperty]
-        private List<Guid> _genresId;
+        private List<Guid> _genresId = [];
 
         [ObservableProperty]
-        private List<Guid> _catequriesId;
+        private List<Guid> _catequriesId = [];
 
         [ObservableProperty]
-        private List<Guid> _actorsId;
+        private List<Guid> _actorsId = [];
 
         [ObservableProperty]
         private string _name = default!;
+
+        [ObservableProperty]
+        private string _filePath = default!;
 
         [ObservableProperty]
         private string _directorName = default!;
@@ -58,12 +61,25 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task OnSumbit()
         {
-            //var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId,Name, Rate, CatequryId, GenreId, ConstructionYear, DirectorName);
-            //if (!isSuccess)
-            //{
-            //    _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
-            //    return;
-            //}
+            if (ConstructionYear == null)
+            {
+                _snackbarService.Show("کاربر گرامی", "وارد کردن سال ساخت الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                _snackbarService.Show("کاربر گرامی", "انتخاب بنر فیلم الزامیست!!!", ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+
+            var (error, isSuccess) = await _unitOfWork.MoviesRepository.UpdataMovie(MovieId, Name, FilePath, Rate, CatequriesId, GenresId, ActorsId, ConstructionYear.Value, DirectorName);
+            if (!isSuccess)
+            {
+                _snackbarService.Show("کاربر گرامی", error, ControlAppearance.Secondary, new SymbolIcon(SymbolRegular.Warning20), TimeSpan.FromMilliseconds(3000));
+                return;
+            }
+            await _unitOfWork.SaveChangesAsync();
             _snackbarService.Show("کاربر گرامی", "عملیات با موفقیت انجام شد.", ControlAppearance.Success, new SymbolIcon(SymbolRegular.CheckmarkCircle20), TimeSpan.FromMilliseconds(3000));
 
             _navigationService.Navigate(typeof(MoviesListPage));

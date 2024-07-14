@@ -1,6 +1,6 @@
 ﻿namespace DomainShared.ViewModels.Genres
 {
-    public record GenresListViewModel
+    public class GenresListViewModel
     {
         public Guid Id { get; set; }
         public string Titele { get; set; } = default!;

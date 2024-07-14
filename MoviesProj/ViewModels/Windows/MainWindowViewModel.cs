@@ -19,14 +19,14 @@ namespace MoviesProj.ViewModels.Windows
             },
             new NavigationViewItem()
             {
-                Content = "moviesList",
+                Content = "Movies",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.MoviesListPage),
                 MenuItemsSource = new ObservableCollection<object>
                 {
-                    new NavigationViewItem("ListMovies", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.MoviesListPage)),
+                    //new NavigationViewItem("ListMovies", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.MoviesListPage)),
                     new NavigationViewItem("CreateMovie", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.CreateMoviesPage)),
-                    new NavigationViewItem("update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateMoviePage)),
+                    new NavigationViewItem("update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateMoviePage)){Visibility = Visibility.Collapsed},
                 }
             },
         };

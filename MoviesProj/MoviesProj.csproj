@@ -27,12 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Background.png" />
     <None Remove="Assets\Background1.png" />
-    <None Remove="Assets\Johnny Depp.png" />
-    <None Remove="Assets\Karl Urban.jpg" />
-    <None Remove="Assets\Marlon Brando.png" />
-    <None Remove="Assets\Vin Diesel.png" />
+    <None Remove="Assets\Designer.png" />
+    <None Remove="Assets\MovieBanner.png" />
+    <None Remove="Assets\vindiesel.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
@@ -46,12 +44,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Background.png" />
     <Resource Include="Assets\Background1.png" />
-    <Resource Include="Assets\Johnny Depp.png" />
-    <Resource Include="Assets\Karl Urban.jpg" />
-    <Resource Include="Assets\Marlon Brando.png" />
-    <Resource Include="Assets\Vin Diesel.png" />
+    <Content Include="Assets\Designer.png" />
+    <Resource Include="Assets\Johnny Depp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Karl Urban.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Marlon Brando.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\vindiesel.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>

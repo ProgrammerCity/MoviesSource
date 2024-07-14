@@ -9,15 +9,16 @@ namespace Domain.Models.Movies
     public class Movie : AuditedEntity<Guid>
     {
         #region Navigatoin
-        public List<Categury> Categuries{ get; } = [];
+        public List<Categury> Categuries { get; } = [];
 
-        public List<Genre> Genres{ get; } = [];
+        public List<Genre> Genres { get; } = [];
 
-        public List<Actor> Actors{ get; } = [];
+        public List<Actor> Actors { get; } = [];
         #endregion
 
         #region Properties
         public string Name { get; private set; } = default!;
+        public string BannerPath { get; private set; } = default!;
         public string DirectorName { get; private set; } = default!;
         public int ConstructionYear { get; private set; } = default!;
         public float Rate { get; private set; } = default!;
@@ -32,7 +33,9 @@ namespace Domain.Models.Movies
         public Movie(Guid id,
             List<Categury> categuries,
             string name,
+            string bannerPath,
             List<Genre> genres,
+            List<Actor> actor,
             float rate,
             int constructionYear,
             string directorName)
@@ -40,7 +43,9 @@ namespace Domain.Models.Movies
             Id = id;
             SetCateguries(categuries);
             SetName(name);
+            SetBanner(bannerPath);
             SetGenre(genres);
+            SetActors(actor);
             SetRate(rate);
             SetDirectorNam(directorName);
             SetCustructionYear(constructionYear);
@@ -76,7 +81,7 @@ namespace Domain.Models.Movies
 
         public Movie SetRate(float rate)
         {
-            if (rate < 0)
+            if (rate <= 0)
             {
                 throw new ArgumentException(CoreError.IsMoreThan("امتیاز", "صفر"));
             }
@@ -92,6 +97,18 @@ namespace Domain.Models.Movies
             }
             Genres.Clear();
             Genres.AddRange(genres);
+            return this;
+
+        }
+
+        public Movie SetActors(List<Actor> acts)
+        {
+            if (acts.Count == 0)
+            {
+                throw new ArgumentException("افزودن حداقل یک بازیگر الزامیست!!!");
+            }
+            Actors.Clear();
+            Actors.AddRange(acts);
             return this;
 
         }
@@ -120,6 +137,21 @@ namespace Domain.Models.Movies
                 throw new ArgumentException(CoreError.IsLess("نام فیلم", "پنجاه"));
             }
             Name = name;
+            return this;
+        }
+        
+        public Movie SetBanner(string bannerPath)
+        {
+            if (string.IsNullOrEmpty(bannerPath))
+            {
+                throw new ArgumentException(CoreError.IsMandatory("بنر فیلم"));
+            }
+
+            if (bannerPath.Length > 50)
+            {
+                throw new ArgumentException(CoreError.IsLess("بنر فیلم", "پنجاه"));
+            }
+            BannerPath = bannerPath;
             return this;
         }
     }

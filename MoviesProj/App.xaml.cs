@@ -15,6 +15,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
+using Wpf.Ui.Controls;
 
 namespace MoviesProj
 {
@@ -56,22 +57,23 @@ namespace MoviesProj
 
 
                 services.AddSingleton<IUnitOfWork, UnitOfWork>();
+                services.AddSingleton<SnackbarPresenter>();
                 services.AddSingleton<MainWindowViewModel>();
 
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
+                services.AddTransient<DashboardPage>();
+                services.AddTransient<DashboardViewModel>();
 
-                services.AddSingleton<CreateMoviesPage>();
-                services.AddSingleton<CreateMoviesViewModel>();
+                services.AddTransient<CreateMoviesPage>();
+                services.AddTransient<CreateMoviesViewModel>();
 
-                services.AddSingleton<MoviesListPage>();
-                services.AddSingleton<MoviesListViewModel>();
+                services.AddTransient<MoviesListPage>();
+                services.AddTransient<MoviesListViewModel>();
 
-                services.AddSingleton<SettingsPage>();
-                services.AddSingleton<SettingsViewModel>();
+                services.AddTransient<SettingsPage>();
+                services.AddTransient<SettingsViewModel>();
 
-                services.AddSingleton<UpdateMoviePage>();
-                services.AddSingleton<UpdateMovieViewModel>();
+                services.AddTransient<UpdateMoviePage>();
+                services.AddTransient<UpdateMovieViewModel>();
 
                 services.AddDbContext<MainApplicationDbContext>();
 
