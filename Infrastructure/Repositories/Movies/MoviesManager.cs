@@ -8,6 +8,7 @@ using DomainShared.ViewModels.PagedResult;
 using EntityCore.Data;
 using EntityFreamewoerkCore.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace EntityFreamewoerkCore.Movies
 {
@@ -58,6 +59,19 @@ namespace EntityFreamewoerkCore.Movies
                 await q.Skip(--pageNum * pageCount).Take(pageCount).ToListAsync());
         }
 
+        public async Task<List<MoviListViewModel>> GetDashboardMovies()
+        {
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return await TableNoTracking
+                          .Select(t => new MoviListViewModel(t.Id,
+                              t.Name,
+                              path + t.BannerPath,
+                              t.DirectorName,
+                              string.Join(" , ", t.Genres.Select(g => g.Titele).ToList()),
+                              t.Rate,
+                              t.ConstructionYear)).ToListAsync();
+        }
+
 
         public async Task<(string error, bool isSuccess)> Create(string name,
                     string bannerPath,
@@ -93,22 +107,29 @@ namespace EntityFreamewoerkCore.Movies
             float rate,
             List<Guid> categuries,
             List<Guid> genres,
+            List<Guid> actors,
             int constructionYear,
             string directorName)
         {
-            var movie = await Entities.FirstOrDefaultAsync(t => t.Id == movieId);
+            var movie = await Entities
+                .Include(t => t.Categuries)
+                .Include(t => t.Genres)
+                .Include(t => t.Actors)
+                .FirstOrDefaultAsync(t => t.Id == movieId);
 
             if (movie == null)
                 return new("فیلم مورد نظر یافت نشد!!!", false);
 
-            var cats = await DbContext.Set<Categury>().AsNoTracking().Where(t => categuries.Contains(t.Id)).ToListAsync();
-            var gens = await DbContext.Set<Genre>().AsNoTracking().Where(t => genres.Contains(t.Id)).ToListAsync();
+            var cats = await DbContext.Set<Categury>().Where(t => categuries.Contains(t.Id)).ToListAsync();
+            var gens = await DbContext.Set<Genre>().Where(t => genres.Contains(t.Id)).ToListAsync();
+            var acts = await DbContext.Set<Actor>().Where(t => actors.Contains(t.Id)).ToListAsync();
             try
             {
                 movie.SetName(name);
                 movie.SetBanner(bannerPath);
                 movie.SetGenre(gens);
                 movie.SetCateguries(cats);
+                movie.SetActors(acts);
                 movie.SetRate(rate);
                 movie.SetCustructionYear(constructionYear);
                 movie.SetDirectorNam(directorName);

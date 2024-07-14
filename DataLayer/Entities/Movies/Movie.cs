@@ -81,7 +81,7 @@ namespace Domain.Models.Movies
 
         public Movie SetRate(float rate)
         {
-            if (rate < 0)
+            if (rate <= 0)
             {
                 throw new ArgumentException(CoreError.IsMoreThan("امتیاز", "صفر"));
             }
@@ -95,6 +95,7 @@ namespace Domain.Models.Movies
             {
                 throw new ArgumentException("افزودن حداقل یک ژانر الزامیست!!!");
             }
+            Genres.Clear();
             Genres.AddRange(genres);
             return this;
 
@@ -106,6 +107,7 @@ namespace Domain.Models.Movies
             {
                 throw new ArgumentException("افزودن حداقل یک بازیگر الزامیست!!!");
             }
+            Actors.Clear();
             Actors.AddRange(acts);
             return this;
 
@@ -117,6 +119,7 @@ namespace Domain.Models.Movies
             {
                 throw new ArgumentException("افزودن حداقل یک دسته الزامیست!!!");
             }
+            Categuries.Clear();
             Categuries.AddRange(categuries);
             return this;
 

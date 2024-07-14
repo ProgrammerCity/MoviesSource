@@ -305,15 +305,15 @@
 
                         <Button Grid.Row="6"
                                 Grid.Column="1"
-                                Margin="5"
-                                FontSize="16"
-                                Padding="30 4"
+                                Margin="0"
                                 x:Name="Btn_submit"
-                                FontFamily="Calibri"
+                                IsDefault="True"
                                 Click="Btn_submit_Click"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                            افزودن
+                            <TextBlock FontSize="16"
+                                       Padding="30 4"
+                                       FontFamily="Calibri">افزودن</TextBlock>
                         </Button>
 
 

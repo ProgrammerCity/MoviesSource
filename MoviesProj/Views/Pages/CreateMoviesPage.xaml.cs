@@ -4,6 +4,7 @@ using DomainShared.ViewModels.Genres;
 using MoviesProj.ViewModels.Pages;
 using System.IO;
 using System.Reflection;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Wpf.Ui.Controls;
 
@@ -55,17 +56,18 @@ namespace MoviesProj.Views.Pages
 
             if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string curFile = Path.GetFileName(fd.FileName);
+                string ext = Path.GetExtension(fd.FileName);
                 string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var imagePath = path + @"\Assets\Images";
+                var imagePath = path + @"\Images";
                 if (!Directory.Exists(imagePath))
                 {
                     _ = Directory.CreateDirectory(imagePath);
                 }
 
-                string newPathToFile = Path.Combine(imagePath, curFile);
+                var newName = Guid.NewGuid().ToString() + ext;
+                string newPathToFile = Path.Combine(imagePath, newName);
                 File.Copy(fd.FileName, newPathToFile);
-                ViewModel.FilePath = Path.Combine(@"\Assets\Images", curFile);
+                ViewModel.FilePath = @"/Images/" + newName;
             }
         }
     }

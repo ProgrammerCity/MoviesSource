@@ -61,7 +61,7 @@ namespace DomainShared.Error
         /// <returns></returns>
         public static string IsMoreThan(string paramName, string name2)
         {
-            return $"{paramName} باید از {name2} بزرگتر بیشتر باشد";
+            return $"{paramName} باید از {name2} بزرگتر باشد";
         }  
                
         /// <summary>

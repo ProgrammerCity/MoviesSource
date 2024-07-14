@@ -16,6 +16,8 @@ namespace Domain.Movies
             int pageNum,
             int pageCount);
 
+        Task<List<MoviListViewModel>> GetDashboardMovies();
+
         Task<(string error, bool isSuccess)> Create(string name,
             string bannerPath,
              float rate,
@@ -26,14 +28,15 @@ namespace Domain.Movies
              string directorName);
 
         Task<(string error, bool isSuccess)> UpdataMovie(Guid movieId,
-             string name,
-             string bannerPath,
-             float rate,
-             List<Guid> categuries,
-             List<Guid> genres,
-             int constructionYear,
-             string directorName);
-        
+            string name,
+            string bannerPath,
+            float rate,
+            List<Guid> categuries,
+            List<Guid> genres,
+            List<Guid> actors,
+            int constructionYear,
+            string directorName);
+
         Task<(string error, bool isSuccess)> DeleteMovie(Guid movieId);
     }
 }

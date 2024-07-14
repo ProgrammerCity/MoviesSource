@@ -27,12 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\MovieBanner.png" />
     <None Remove="Assets\Background1.png" />
-    <None Remove="Assets\Images\Johnny Depp.png" />
-    <None Remove="Assets\Images\Karl Urban.jpg" />
-    <None Remove="Assets\Images\Marlon Brando.png" />
-    <None Remove="Assets\Images\Vin Diesel.png" />
+    <None Remove="Assets\Designer.png" />
+    <None Remove="Assets\MovieBanner.png" />
+    <None Remove="Assets\vindiesel.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
@@ -46,32 +44,18 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Content Include="Assets\**\*.*">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Remove="Assets\Images\MovieBanner.png" />
-	  <Content Remove="Assets\Images\Johnny Depp.png" />
-	  <Content Remove="Assets\Images\Karl Urban.jpg" />
-	  <Content Remove="Assets\Images\Marlon Brando.png" />
-	  <Content Remove="Assets\Images\MovieBanner.png" />
-	  <Content Remove="Assets\Images\Vin Diesel.png" />
-    <Resource Include="Assets\Images\MovieBanner.png" />
     <Resource Include="Assets\Background1.png" />
-    <Resource Include="Assets\Images\Johnny Depp.png">
+    <Content Include="Assets\Designer.png" />
+    <Resource Include="Assets\Johnny Depp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\Images\Karl Urban.jpg">
+    <Resource Include="Assets\Karl Urban.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\Images\Marlon Brando.png">
+    <Resource Include="Assets\Marlon Brando.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\Images\MovieBanner.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\Images\Vin Diesel.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Assets\vindiesel.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>

@@ -63,17 +63,21 @@ namespace MoviesProj.Views.Pages
 
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                string curFile = Path.GetFileName(fd.FileName);
+                string ext = Path.GetExtension(fd.FileName);
                 string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var imagePath = path + @"\Assets\Images";
+                var imagePath = path + @"\Images";
                 if (!Directory.Exists(imagePath))
                 {
                     _ = Directory.CreateDirectory(imagePath);
                 }
 
-                string newPathToFile = Path.Combine(imagePath, curFile);
+                var newName = Guid.NewGuid().ToString() + ext;
+                string newPathToFile = Path.Combine(imagePath, newName);
                 File.Copy(fd.FileName, newPathToFile);
-                ViewModel.FilePath = Path.Combine(@"\Assets\Images", curFile);
+                if (DataContext is UpdateMoviePage c)
+                {
+                    c.ViewModel.FilePath = @"/Images/" + newName;
+                }
             }
         }
 

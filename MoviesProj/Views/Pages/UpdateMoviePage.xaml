@@ -310,15 +310,18 @@
 
                         <Button Grid.Row="6"
                                 Grid.Column="1"
-                                Margin="5"
-                                FontSize="16"
-                                Padding="30 4"
+                                Margin="0"
+                                IsDefault="True"
                                 x:Name="Btn_submit"
-                                FontFamily="Calibri"
                                 Click="Btn_submit_Click"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                            افزودن
+                            <TextBlock FontSize="16"
+                                       Padding="30 4"
+                                       FontFamily="Calibri">
+                            ذخیره تغییرات
+
+                            </TextBlock>
                         </Button>
 
 
