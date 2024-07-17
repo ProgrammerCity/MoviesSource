@@ -98,7 +98,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <!--#region MovieTitele -->
+                        <!--#region MovieTitele & banner -->
                         <Grid Grid.Row="0"
                               Grid.ColumnSpan="3"
                               VerticalAlignment="Bottom"
@@ -130,6 +130,8 @@
                             </ui:Button>
                         </Grid>
                         <!--#endregion-->
+
+                        <!--#region ConstructionYear & DirectorName & rate -->
                         <StackPanel Grid.Row="1"
                                     Margin="0 10 10 10">
                             <ui:TextBox TextAlignment="Center"
@@ -159,14 +161,13 @@
                                         Text="{Binding ViewModel.DirectorName, Mode=OneWayToSource}"
                                         FontFamily="Calibri" />
                         </StackPanel>
-
                         <ui:RatingControl Grid.Row="2"
                                           Grid.Column="1"
                                           Value="{Binding ViewModel.Rate , Mode=OneWayToSource}"
                                           Margin="0 8 0 0 "
                                           FlowDirection="LeftToRight"
                                           HorizontalAlignment="Center" />
-
+                        <!--#endregion-->
 
                         <!--#region genre -->
                         <Grid Grid.Row="3"
@@ -303,6 +304,7 @@
                         </Grid>
                         <!--#endregion-->
 
+                        <!--submit-->
                         <Button Grid.Row="6"
                                 Grid.Column="1"
                                 Margin="0"
@@ -315,7 +317,6 @@
                                        Padding="30 4"
                                        FontFamily="Calibri">افزودن</TextBlock>
                         </Button>
-
 
                     </Grid>
                     <!--#endregion-->
