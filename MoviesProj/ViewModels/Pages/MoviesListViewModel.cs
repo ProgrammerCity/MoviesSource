@@ -43,9 +43,15 @@ namespace MoviesProj.ViewModels.Pages
         [ObservableProperty]
         private string _name = default!;
 
+        /// <summary>
+        /// SuggestBox List
+        /// </summary>
         [ObservableProperty]
         private List<GenresListViewModel> _genreList = [];
 
+        /// <summary>
+        /// DataGrid List
+        /// </summary>
         [ObservableProperty]
         private IEnumerable<MoviListViewModel> _list = default!;
 
@@ -96,7 +102,10 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task OnUpdate(Guid parameter)
         {
+            // get movie=> include(Genres , categury , Actors)
             var movie = await _unitOfWork.MoviesRepository.GetMovieById(parameter);
+
+            // Get ListView Items
             var categuryList = new ObservableCollection<CateguryListViewModel>(await _unitOfWork.CateguryRepository.GetCateguryList());
             var genreList = new ObservableCollection<GenresListViewModel>(await _unitOfWork.GenresRepository.GetGenresList());
             var actorList = new ObservableCollection<ActorsListViewModel>(await _unitOfWork.ActorsRepository.GetActorsList());

@@ -2,15 +2,10 @@
 using DomainShared.ViewModels.Categuries;
 using DomainShared.ViewModels.Genres;
 using MoviesProj.ViewModels.Pages;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
-using System.Windows.Controls;
 using System.Reflection;
-using System.Windows.Media;
-using Wpf.Ui.Controls;
 using System.Windows.Forms;
+using Wpf.Ui.Controls;
 
 namespace MoviesProj.Views.Pages
 {
