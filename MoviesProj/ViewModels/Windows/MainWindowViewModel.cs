@@ -24,9 +24,8 @@ namespace MoviesProj.ViewModels.Windows
                 TargetPageType = typeof(Views.Pages.MoviesListPage),
                 MenuItemsSource = new ObservableCollection<object>
                 {
-                    //new NavigationViewItem("ListMovies", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.MoviesListPage)),
                     new NavigationViewItem("CreateMovie", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.CreateMoviesPage)),
-                    new NavigationViewItem("update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateMoviePage)){Visibility = Visibility.Collapsed},
+                    new NavigationViewItem("Update", SymbolRegular.DataHistogram24 ,typeof(Views.Pages.UpdateMoviePage)){Visibility = Visibility.Collapsed},
                 }
             },
         };

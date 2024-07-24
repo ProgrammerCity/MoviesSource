@@ -15,6 +15,7 @@
       d:DesignWidth="800"
       Title="MoviesListPage">
 
+    
     <Border CornerRadius="9 0 0 0">
         <Border.Background>
             <ImageBrush ImageSource="/Assets/Background1.png"
@@ -22,8 +23,10 @@
 
         </Border.Background>
 
+        <!--Main Grid-->
         <Grid FlowDirection="RightToLeft">
 
+            <!--Dark Border-->
             <Border Opacity=".8"
                     CornerRadius="15"
                     Margin="40"
@@ -33,13 +36,19 @@
                                 KernelType="Gaussian" />
                 </Border.Effect>
             </Border>
+
+            <!--Container Border-->
             <Border  Margin="57">
+
+                <!--Container Grid-->
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
+
+                    <!--#region Pins -->
                     <ui:SymbolIcon Symbol="Circle16"
                                    Filled="True"
                                    HorizontalAlignment="Left"
@@ -68,13 +77,18 @@
                                    Foreground="#FF949494"
                                    VerticalAlignment="Bottom"
                                    FontSize="7" />
-                    <Grid>
+                    <!--#endregion-->
+                    
+                    <!--Search Grid-->
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+
+                        <!--MovieTitele-->
                         <StackPanel Margin="20 0 0 0 ">
 
                             <TextBlock FontFamily="Calibri"
@@ -88,6 +102,7 @@
                                         Margin="0 4 0 0" />
                         </StackPanel>
 
+                        <!--ConstructionYear-->
                         <StackPanel Grid.Column="1"
                                     Margin="20 0 0 0 ">
 
@@ -102,6 +117,7 @@
 
                         </StackPanel>
 
+                        <!--Genre-->
                         <StackPanel Grid.Column="2"
                                     Margin="20 0 0 0">
                             <TextBlock FontFamily="Calibri"
@@ -116,6 +132,7 @@
                                                Margin="0 4 0 0" />
                         </StackPanel>
 
+                        <!--SearchButton-->
                         <Button Grid.Column="3"
                                 Margin="20 22.3 0 -5"
                                 Padding="17 4 17 4"
@@ -127,6 +144,8 @@
                                        FontSize="16">جستجو</TextBlock>
                         </Button>
                     </Grid>
+                    
+                    <!--DataGrid-->
                     <DataGrid Grid.Row="1"
                               Padding="7"
                               FontSize="15"
@@ -242,6 +261,8 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    
+                    <!--Pagination-->
                     <nu:Pagination Grid.Row="2"
                                    Margin="0 10"
                                    CurrntPage="{Binding ViewModel.CurrentPage}"

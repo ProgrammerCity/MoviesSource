@@ -1,5 +1,6 @@
 ﻿using Domain.IRepositories;
 using DomainShared.ViewModels.Movies;
+using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
 
 namespace MoviesProj.ViewModels.Pages
@@ -9,7 +10,7 @@ namespace MoviesProj.ViewModels.Pages
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         [ObservableProperty]
-        private IEnumerable<MoviListViewModel> _list;
+        private ObservableCollection<MoviListViewModel> _list;
 
         public async void OnNavigatedTo()
         {
@@ -23,7 +24,7 @@ namespace MoviesProj.ViewModels.Pages
         [RelayCommand]
         private async Task InitializeViewModel()
         {
-            List = await _unitOfWork.MoviesRepository.GetDashboardMovies();
+            List = new ObservableCollection<MoviListViewModel>(await _unitOfWork.MoviesRepository.GetDashboardMovies());
         }
     }
 }

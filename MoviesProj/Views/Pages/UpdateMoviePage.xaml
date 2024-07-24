@@ -137,6 +137,7 @@
                         </Grid>
                         <!--#endregion-->
 
+                        <!--#region ConstructionYear & DirectorName & rate -->
                         <StackPanel Grid.Row="1"
                                     Margin="0 10 10 10">
                             <ui:TextBox TextAlignment="Center"
@@ -172,6 +173,7 @@
                                           Margin="0 8 0 0 "
                                           FlowDirection="LeftToRight"
                                           HorizontalAlignment="Center" />
+                        <!--#endregion-->
 
                         <!--#region genre -->
                         <Grid Grid.Row="3"
@@ -308,6 +310,7 @@
                         </Grid>
                         <!--#endregion-->
 
+                        <!--SaveChange-->
                         <Button Grid.Row="6"
                                 Grid.Column="1"
                                 Margin="0"
@@ -320,10 +323,8 @@
                                        Padding="30 4"
                                        FontFamily="Calibri">
                             ذخیره تغییرات
-
                             </TextBlock>
                         </Button>
-
 
                     </Grid>
                     <!--#endregion-->
