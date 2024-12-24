@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using MoviesProj.Views.Pages;
 using MoviesProj.Views.Windows;
+using Serilog;
 using Wpf.Ui;
 
 namespace MoviesProj.Services
@@ -43,6 +44,10 @@ namespace MoviesProj.Services
         /// </summary>
         private async Task HandleActivationAsync()
         {
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                Log.Error(e.ExceptionObject as Exception, "An unhandled exception occurred.");
+            };
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
                 _navigationWindow = (

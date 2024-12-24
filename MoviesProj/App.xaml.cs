@@ -1,6 +1,7 @@
-﻿using Domain.IRepositories;
-using Domain.Models.Movies;
-using DomainShared.ViewModels.Movies;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows.Threading;
+using Domain.IRepositories;
 using EntityCore.Data;
 using EntityFreamewoerkCore.Data;
 using Microsoft.Extensions.Configuration;
@@ -11,9 +12,7 @@ using MoviesProj.ViewModels.Pages;
 using MoviesProj.ViewModels.Windows;
 using MoviesProj.Views.Pages;
 using MoviesProj.Views.Windows;
-using System.IO;
-using System.Reflection;
-using System.Windows.Threading;
+using Serilog;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
@@ -34,6 +33,18 @@ namespace MoviesProj
             .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
             .ConfigureServices((context, services) =>
             {
+                Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Verbose()
+                    .WriteTo.File(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "Log-.txt"),
+                        rollingInterval: RollingInterval.Day,
+                        rollOnFileSizeLimit: true,
+                        fileSizeLimitBytes: 100000)
+                    .CreateLogger();
+
+                services.AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddSerilog(dispose: true);
+                });
                 services.AddHostedService<ApplicationHostService>();
 
                 // Page resolver service
